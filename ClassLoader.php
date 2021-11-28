@@ -6,6 +6,7 @@
  */
 class ClassLoader
 {
+    //vie transformovat namespace
      public static function Boot()
      {
          spl_autoload_register(function ($class_name) {

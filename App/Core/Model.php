@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Core\DB\Connection;
+use App\Core\DB\DebugStatement;
 use PDOException;
 
 /**

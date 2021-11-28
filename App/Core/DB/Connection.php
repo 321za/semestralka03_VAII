@@ -46,7 +46,6 @@ class Connection
         }
     }
 
-
     /**
      * Prepare SQL command
      * @return \PDOStatement | DebugStatement

@@ -39,7 +39,6 @@ class ViewResponse extends Response
         $contentHTML = ob_get_clean();
 
         require "App" . DIRECTORY_SEPARATOR . "Views" . DIRECTORY_SEPARATOR . $this->layoutName;
-
     }
 
     /**

@@ -20,13 +20,14 @@ class Request
     /**
      * Request constructor.
      */
+    //do privatnych atributov sa priradia globalne polia
     public function __construct()
     {
         $this->get = $_GET;
         $this->post = $_POST;
         $this->request = $_REQUEST;
         $this->server = $_SERVER;
-
+        //kontroluje ci doslo k requestu cez ajax
         $this->ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
     }
 
