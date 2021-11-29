@@ -39,7 +39,7 @@ body {
 }
 
 .pata {
-     margin-top: 5vw;
+     margin-top: 5vh;
      text-align: center;
      background-color: gray;
      padding: 1.5%;
@@ -51,10 +51,15 @@ body {
     display: inline;
 }
 
+.page-container {
+    min-height: 100%;
+}
+
 .container {
-    margin-top: 5vw;
+    margin-top: 5vh;
     max-width: 75vw;
 }
+
 
 .container img {
     max-width: 100%;

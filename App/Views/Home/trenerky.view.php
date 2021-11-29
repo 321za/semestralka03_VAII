@@ -7,9 +7,9 @@
             <img src="<?= $trainer->getPhotoAddress() ?>">
         </div>
         <div class="col-12 col-md-1">
-        <a href="?c=home&a=addstar&idecko=<?= $trainer->id ?>" class="btn btn-primary">
+        <a href="?c=home&a=addStar&id=<?= $trainer->id ?>" class="btn btn-outline-warning" >
             <?= ($trainer->stars > 0 ? $trainer->stars : "") ?>
-            <i class="bi bi-star-fill"></i>
+            <i id="starIcon" class="bi bi-star-fill"></i>
         </a>
         </div>
         <div class="col-12 col-md-6">

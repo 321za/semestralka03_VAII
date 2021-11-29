@@ -2,7 +2,7 @@
 <div class="medzera"> </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-4 offset-sm-4">
+        <div class="col-sm-5 offset-sm-4">
             <h5>Registrácia</h5>
             <br>
             <?php if ($data['error'] != "") { ?>
