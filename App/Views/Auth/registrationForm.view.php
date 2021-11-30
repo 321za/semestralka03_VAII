@@ -2,7 +2,7 @@
 <div class="medzera"> </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-5 offset-sm-4">
+        <div class="col-sm-6 offset-sm-4">
             <h5>Registrácia</h5>
             <br>
             <?php if ($data['error'] != "") { ?>
@@ -12,6 +12,20 @@
                 </div>
             <?php } ?>
             <form name="form1" method="post" action="?c=auth&a=registration">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="fcf-form-group">
+                            <label for="exampleFormControlInput1" class="form-label">Meno</label>
+                            <input type="text" value="<?= @$data['name']?>" class="fcf-form-control" name="name" id="nameValid" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="fcf-form-group">
+                            <label for="exampleFormControlInput1" class="form-label">Priezvisko</label>
+                            <input type="text" value="<?= @$data['surname']?>" class="fcf-form-control" name="surname" id="surnameValid" required>
+                        </div>
+                    </div>
+                </div>
                 <div class="fcf-form-group">
                     <label for="exampleFormControlInput1" class="form-label">Email</label>
                     <input type="email" value="<?= @$data['login']?>" class="fcf-form-control" name="login" id="emailValid" onchange="validateEmail()" required>
