@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Auth;
 use App\Core\Responses\Response;
 use App\Models\User;
+use const http\Client\Curl\AUTH_ANY;
 
 //kontroler,ktory je zodpovedny za prihlasovanie
 
@@ -66,6 +67,9 @@ class AuthController extends AControllerRedirect
 
     public function registration()
     {
+        $name = $this->request()->getValue('name');
+        $surname = $this->request()->getValue('surname');
+        if (Auth::validateName($name) && (Auth::validateName($surname))) {
         $login = $this->request()->getValue('login');
         //skontroluje spravnost emailu
         if (Auth::validateEmail($login)) {
@@ -77,7 +81,7 @@ class AuthController extends AControllerRedirect
                 if ($password == $passwordAgain) {
                     $registered = Auth::registation($login, $password);
                     if ($registered) {
-                        return $this->html(["login"=>$login],'loginForm');
+                        return $this->html(['error' => null,"login"=>$login],'loginForm');
                     } else {
                         $this->redirect('auth', 'registrationForm', ['error' => 'Nepodarilo sa zaregistrovat, email sa už používa.']);
                     }
@@ -89,6 +93,9 @@ class AuthController extends AControllerRedirect
             }
         } else {
            return $this->html( ['error' => 'Email nie je správny.',"login"=>$login],'registrationForm');
+        }
+    } else {
+            $this->redirect('auth', 'registrationForm', ['error' => 'Nespravny formát mena alebo priezviska.']);
         }
     }
 

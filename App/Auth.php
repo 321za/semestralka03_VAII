@@ -61,6 +61,15 @@ class Auth
         }
     }
 
+
+    public static function validateName($name)
+    {
+        if ((ctype_alpha($name)))
+        {
+            return true;
+        }
+    }
+
     public static function validateEmail($login)
     {
         return preg_match("/^[a-zA-Z0-9\.]+@+[a-zA-Z]+(\.)+[a-zA-Z]{2,3}$/i", $login);

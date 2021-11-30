@@ -1,5 +1,40 @@
-var passwordOK;
-var passwordEqual;
+function validateName()
+{
+    let name =  document.getElementById("nameValid");
+    let nameValue = name.value;
+    nameNumber = false;
+    for (let i = 0; i < nameValue.length; i++) {
+        if (nameValue.charAt(i) >= '0' && nameValue.charAt(i) <= '9')
+        {
+            nameNumber = true;
+        }
+    }
+    if (nameNumber) {
+        name.style.color="red";
+    } else {
+        name.style.color="green";
+    }
+}
+
+function validateSurname()
+{
+    let name =  document.getElementById("surnameValid");
+    let nameValue = name.value;
+    nameNumber = false;
+    for (let i = 0; i < nameValue.length; i++) {
+        if (nameValue.charAt(i) >= '0' && nameValue.charAt(i) <= '9')
+        {
+            nameNumber = true;
+        }
+    }
+    if (nameNumber) {
+        name.style.color="red";
+    } else {
+        name.style.color="green";
+    }
+}
+
+
 
 function validateEmail()
 {
@@ -8,10 +43,8 @@ function validateEmail()
      if (inputEmail.value.match(format))
      {
          inputEmail.style.color="rgb(0, 153, 0)";
-         return true;
      } else {
          inputEmail.style.color="red";
-         return false;
      }
 }
 
@@ -36,7 +69,6 @@ function checkPassword(password)
     {
         txt = "silné heslo";
         document.getElementById("kontrolaHesla").style.color="green";
-        passwordOK=true;
     }
     if (((7 < dlzka && dlzka <=9) && (pismena.test(heslo)))
         || ((7< dlzka && dlzka <=9) && obsahujeCislo)
@@ -45,7 +77,6 @@ function checkPassword(password)
     {
         txt = "dobré heslo";
         document.getElementById("kontrolaHesla").style.color="orange";
-        passwordOK=true;
     }
     if (((dlzka <=7) && (pismena.test(heslo)))
         || ((dlzka <=7) && obsahujeCislo)
@@ -54,7 +85,6 @@ function checkPassword(password)
     {
         txt = "slabé heslo";
         document.getElementById("kontrolaHesla").style.color="red";
-        passwordOK=false;
     }
     document.getElementById("kontrolaHesla").innerHTML = txt;
 }
@@ -69,11 +99,9 @@ function equalPassword(passwordAgain, password)
     {
         txt = "heslá sa rovnajú";
         document.getElementById("rovnostHesla").style.color="green";
-        passwordEqual=false;
     } else {
         txt = "heslá sa nerovnajú";
         document.getElementById("rovnostHesla").style.color="red";
-        passwordEqual=true;
     }
     document.getElementById("rovnostHesla").innerHTML = txt;
 }
