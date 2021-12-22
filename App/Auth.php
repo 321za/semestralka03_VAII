@@ -13,7 +13,8 @@ class Auth
                 //SELECT
                 $person = User::getAll('email = ?', [$login]);
                 if ($person) {
-                    $person[0]->setPassword($password);
+                    $hash = password_hash($password, PASSWORD_DEFAULT);
+                    $person[0]->setPassword($hash);
                     //UPDATE
                     $person[0]->save();
                     return true;
@@ -28,7 +29,8 @@ class Auth
             if (!$person)
             {
                 $new = new User();
-                $new->setPassword($password);
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $new->setPassword($hash);
                 $new->setEmail($login);
                 //INSERT
                 $new->save();
@@ -50,7 +52,7 @@ class Auth
         $person = User::getAll('email = ?', [$login]);
         if ($person)
         {
-            if (($person[0]->getEmail() == $login) && ($person[0]->getPassword() == $password))
+            if (($person[0]->getEmail() == $login) && (password_verify($password, $person[0]->getPassword())))
             {
                 $_SESSION['name'] = $login;
                 $_SESSION['id'] = $person[0]->id;
