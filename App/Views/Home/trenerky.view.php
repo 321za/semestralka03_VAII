@@ -7,7 +7,9 @@
             <img src="<?= $trainer->getPhotoAddress() ?>">
         </div>
         <div class="col-12 col-md-1">
+            <?php if (\App\Models\User::isLogged()) {?>
         <a href="?c=home&a=addStar&id=<?= $trainer->id ?>" class="btn btn-outline-warning" >
+            <?php } ?>
             <?= ($trainer->stars > 0 ? $trainer->stars : "") ?>
             <i id="starIcon" class="bi bi-star-fill"></i>
         </a>

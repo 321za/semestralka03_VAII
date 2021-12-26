@@ -27,10 +27,10 @@
                         Kurzy
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="PoleDanceStrana.html">Pole Dance</a></li>
-                        <li><a class="dropdown-item" href="AerialHoop.html">Aerial Hoop</a></li>
-                        <li><a class="dropdown-item" href="#">Aerial Silk</a></li>
-                        <li><a class="dropdown-item" href="#">Flexi</a></li>
+                        <li><a class="dropdown-item" href="?c=home&a=poleDance">Pole Dance</a></li>
+                        <li><a class="dropdown-item" href="?c=home&a=aerialHoop">Aerial Hoop</a></li>
+                        <li><a class="dropdown-item" href="?c=home&a=aerialSilk">Aerial Silk</a></li>
+                        <li><a class="dropdown-item" href="?c=home&a=flexiYoga">Flexi Joga</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -49,14 +49,11 @@
             <?php if (\App\Models\User::isLogged()) {?>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="?c=home">Stena</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="?c=home">Profil</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class = "conto" src="semestralka01/opendoor.png" alt="Log out">
+                        <img class = "conto" src="semestralka03/opendoor.png" alt="Log out">
                     </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="?c=User&a=logout">Odhlasiť sa</a></li>
@@ -68,7 +65,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a href="?c=Auth&a=loginForm">
-                            <img class="conto" alt="Log in" src="semestralka01/login.png">
+                            <img class="conto" alt="Log in" src="semestralka03/login.png">
                         </a>
                     </li>
                 </ul>

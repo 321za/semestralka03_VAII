@@ -32,6 +32,25 @@ class HomeController extends AControllerRedirect
         );
     }
 
+    public function poleDance()
+    {
+        return $this->html();
+    }
+
+    public function aerialHoop()
+    {
+        return $this->html();
+    }
+
+    public function aerialSilk()
+    {
+        return $this->html();
+    }
+
+    public function flexiYoga()
+    {
+        return $this->html();
+    }
 
     //ako bolo na cviceni
     public function addStar()
