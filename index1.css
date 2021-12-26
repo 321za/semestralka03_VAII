@@ -92,6 +92,12 @@ p {
      margin-left: 1vw;
 }
 
+.cena {
+    font-style: oblique;
+    font-family: Dubai;
+    font-weight: bold;
+}
+
 img {
     margin-top: 2%;
 }

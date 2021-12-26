@@ -62,7 +62,7 @@
     <h5>Fitness Acadamy</h5>
     <p>
         Fitness Academy je prvé pole dance štúdio v Žiline. <p>Jednotlivé kurzy prebiehajú pod vedením certifikovanej inštruktorky, členky Slovenskej Športovej Pole Dance Federácie, zaškolenej priamo zakladateľkou Pole Dance na SLOVENSKU.
-        Okrem <a class="klikni" href=""?c=home&a=trenerky"">Pole Dance</a> u nás môžete nájsť aj kurzy <a class="klikni" href=""?c=home&a=trenerky"">Aerial Hoop</a>, <a class="klikni" href=""?c=home&a=trenerky"">Aerial Silk</a> či hodiny <a class="klikni" href=""?c=home&a=trenerky"">Flexi jógy</a>. <p>Taaktiež sa Vám snažíme pripravovať rôzne zaujímavé workshopy či akcie aby Vás hodiny u nás vo Fitness Academy bavili.
+        Okrem <a class="klikni" href=?c=home&a=poleDance>Pole Dance</a> u nás môžete nájsť aj kurzy <a class="klikni" href="?c=home&a=aerialHoop">Aerial Hoop</a>, <a class="klikni" href="?c=home&a=aerialSilk">Aerial Silk</a> či hodiny <a class="klikni" href="?c=home&a=flexiYoga">Flexi jógy</a>. <p>Taaktiež sa Vám snažíme pripravovať rôzne zaujímavé workshopy či akcie aby Vás hodiny u nás vo Fitness Academy bavili.
         Kladieme dôraz na zdravie a bezpečnosť, čiže súčasťou všetkých hodín Pole Dance je dôkladná rozcvička celého tela a tiež dbáme na čo najlepšie technické prevedenie jednotlivých prvkov.
     </p>
 </div>
