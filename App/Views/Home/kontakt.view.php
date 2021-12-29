@@ -27,13 +27,13 @@
                         </div>
 
                         <div class="fcf-form-group">
-                            <label for="Message" class="fcf-label">Správa:</label>
-                            <textarea id="mess" class="fcf-form-control" rows="6" onkeyup="checkMessage()" required></textarea>
+                            <label>Správa:</label>
+                            <textarea id="mess" class="fcf-form-control"  onkeyup="checkMessage()" required></textarea>
                             <p id="messageOk"></p>
                         </div>
 
                         <div class="fcf-form-group">
-                            <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odoslať</button>
+                            <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odoslať</button>
                         </div>
 
                     </form>

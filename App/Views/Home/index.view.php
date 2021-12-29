@@ -21,28 +21,24 @@
             <img src="semestralka/poledance.png" class="d-block w-100" alt="Pole Dance">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Pole Dance</h5>
-                <p>Some representative placeholder content for the first slide.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="semestralka/poledance.png" class="d-block w-100" alt="Aerial Hoop">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Aerial Hoop</h5>
-                <p>Some representative placeholder content for the second slide.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="semestralka/poledance.png" class="d-block w-100" alt="Aerial Silk">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Aerial Silk</h5>
-                <p>Some representative placeholder content for the third slide.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="semestralka/poledance.png" class="d-block w-100" alt="Flexi">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Flexi</h5>
-                <p>Some representative placeholder content for the second slide.</p>
             </div>
         </div>
     </div>
@@ -65,4 +61,29 @@
         Okrem <a class="klikni" href=?c=home&a=poleDance>Pole Dance</a> u nás môžete nájsť aj kurzy <a class="klikni" href="?c=home&a=aerialHoop">Aerial Hoop</a>, <a class="klikni" href="?c=home&a=aerialSilk">Aerial Silk</a> či hodiny <a class="klikni" href="?c=home&a=flexiYoga">Flexi jógy</a>. <p>Taaktiež sa Vám snažíme pripravovať rôzne zaujímavé workshopy či akcie aby Vás hodiny u nás vo Fitness Academy bavili.
         Kladieme dôraz na zdravie a bezpečnosť, čiže súčasťou všetkých hodín Pole Dance je dôkladná rozcvička celého tela a tiež dbáme na čo najlepšie technické prevedenie jednotlivých prvkov.
     </p>
+</div>
+
+<div class="rozdelovac">Príďte si to vyskúšať na vlastnej koži.</div>
+
+<div class="container">
+    <h1>ČO O NÁS POVEDALI</h1>
+        <?php foreach ($data['reviews'] as $reviews) { ?>
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    <h5><?= $reviews->getAuthor() ?> </h5>
+                    <p> <?= $reviews->getText() ?> </p>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php if (\App\Models\User::isLogged()) {?>
+    <form name="form3" method="post" action="?c=review&a=addReview">
+    <div class="fcf-form-group">
+        <label>Hodnotenie:</label>
+        <textarea id="mess"  class="fcf-form-control"  onkeyup="checkMessage()" name="mes" required></textarea>
+        <p id="messageOk"></p>
+        <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odoslať hodnotenie</button>
+    </div>
+    </form>
+    <?php } ?>
 </div>

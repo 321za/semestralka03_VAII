@@ -23,7 +23,7 @@ class Auth
                 }
     }
 
-    public static function registation($login, $password)
+    public static function registation($name, $login, $password)
     {
             $person = User::getAll('email = ?', [$login]);
             if (!$person)
@@ -32,6 +32,7 @@ class Auth
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $new->setPassword($hash);
                 $new->setEmail($login);
+                $new->setName($name);
                 //INSERT
                 $new->save();
                 return true;
@@ -54,8 +55,10 @@ class Auth
         {
             if (($person[0]->getEmail() == $login) && (password_verify($password, $person[0]->getPassword())))
             {
-                $_SESSION['name'] = $login;
+                $_SESSION['login'] = $login;
                 $_SESSION['id'] = $person[0]->id;
+                $_SESSION['name'] = $person[0]->getName();
+                $_SESSION['hodnotenie'] = 0;
                 return true;
             } else {
                 return false;

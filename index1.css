@@ -25,13 +25,18 @@ body {
     padding: 1vw;
 }
 
+.nav-link {
+    color: black  !important;
+    font-weight: normal;
+}
+
 .nav-item :hover {
-    color: #00b3b3;
+    color: #00b3b3  !important;
 }
 
 .navbar-nav .nav-item:hover .nav-link {
-    color: #00b3b3;
-    background-color : #e6e6e6;
+    color: #00b3b3  !important;
+    background-color : #e6e6e6  !important;
 }
 
 .conto {
@@ -104,6 +109,18 @@ img {
 
 .medzera {
     margin-top: 7vw;
+}
+
+.rozdelovac {
+    text-align: center;
+    margin-top: 5%;
+    background-color: #00b3b3;
+    padding: 1.5%;
+    margin-bottom: 5%;
+    font-style: oblique;
+    font-family: Dubai;
+    font-weight: bold;
+    font-size: larger;
 }
 
 .fcf-form-group {

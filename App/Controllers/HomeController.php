@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Auth;
 use App\Config\Configuration;
 use App\Models\Trainer;
+use App\Models\Reviews;
 use App\Core\DB\DebugStatement;
 
 /**
@@ -17,9 +18,11 @@ class HomeController extends AControllerRedirect
 
     public function index()
     {
+        $reviews = Reviews::getAll();
         return $this->html(
             [
-                'warning' => $this->request()->getValue('warning')
+                'warning' => $this->request()->getValue('warning'),
+                'reviews' => $reviews
             ]
         );
     }
@@ -31,6 +34,7 @@ class HomeController extends AControllerRedirect
             ['trainers' => $trainer]
         );
     }
+
 
     public function poleDance()
     {
@@ -55,14 +59,16 @@ class HomeController extends AControllerRedirect
     //ako bolo na cviceni
     public function addStar()
     {
-        $id = $this->request()->getValue('id');
-        if ($id)
-        {
-            //SELECT
-            $trainer = Trainer::getOne($id);
-            $trainer->stars += 1;
-            //UPDATE
-            $trainer->save();
+        if ($_SESSION['hodnotenie'] == 0) {
+            $id = $this->request()->getValue('id');
+            if ($id) {
+                //SELECT
+                $trainer = Trainer::getOne($id);
+                $trainer->stars += 1;
+                //UPDATE
+                $trainer->save();
+            }
+            $_SESSION['hodnotenie'] = 1;
         }
         $this->redirect('home','trenerky');
     }

@@ -1,19 +1,25 @@
 <?php
 
+namespace App\Models;
+
+use App\Core\DB\Connection;
+use App\Core\Model;
+
+
 class Reviews extends \App\Core\Model
 {
 
     public function __construct(
-        public int $id_recenzie = 0,
-        public ?string $text_recenzie = null,
-        public ?string $autor = null,
+        public int     $id = 0,
+        public ?string $text = null,
+        public ?string $author = null,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id_recenzie', 'text_recenzie','autor'];
+        return ['id', 'text','author'];
     }
 
     static public function setTableName()
@@ -24,48 +30,48 @@ class Reviews extends \App\Core\Model
     /**
      * @return int
      */
-    public function getIdRecenzie(): int
+    public function getId(): int
     {
-        return $this->id_recenzie;
+        return $this->id;
     }
 
     /**
-     * @param int $id_recenzie
+     * @param int $id
      */
-    public function setIdRecenzie(int $id_recenzie): void
+    public function setId(int $id): void
     {
-        $this->id_recenzie = $id_recenzie;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTextRecenzie(): ?string
-    {
-        return $this->text_recenzie;
-    }
-
-    /**
-     * @param string|null $text_recenzie
-     */
-    public function setTextRecenzie(?string $text_recenzie): void
-    {
-        $this->text_recenzie = $text_recenzie;
+        $this->id = $id;
     }
 
     /**
      * @return string|null
      */
-    public function getAutor(): ?string
+    public function getText(): ?string
     {
-        return $this->autor;
+        return $this->text;
     }
 
     /**
-     * @param string|null $autor
+     * @param string|null $text
      */
-    public function setAutor(?string $autor): void
+    public function setText(?string $text): void
     {
-        $this->autor = $autor;
+        $this->text = $text;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param string|null $author
+     */
+    public function setAuthor(?string $author): void
+    {
+        $this->author = $author;
     }
 }

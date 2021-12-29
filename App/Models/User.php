@@ -10,13 +10,14 @@ class User extends \App\Core\Model
         public int $id = 0,
         public ?string $email = null,
         public ?string $password = null,
+        public ?string $name = null,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id', 'email', 'password'];
+        return ['id', 'email', 'password','name'];
     }
 
     static public function setTableName()
@@ -28,13 +29,13 @@ class User extends \App\Core\Model
     public static function isLogged()
     {
         //vrati true a lebo false, podla toho ci je clovek prihlaseny
-        return isset($_SESSION['name']);
+        return isset($_SESSION['login']);
     }
 
     public static function logout()
     {
         //zrusim session a aplikacia sa bdue tvarit, ze nikto nie je prihlaseny
-        unset($_SESSION['name']);
+        unset($_SESSION['login']);
         unset($_SESSION['id']);
         session_destroy();
     }
@@ -45,7 +46,7 @@ class User extends \App\Core\Model
         $id = $_SESSION['id'];
         $user = User::getOne($id);
         $user->delete();
-        unset($_SESSION['name']);
+        unset($_SESSION['login']);
         unset($_SESSION['id']);
         session_destroy();
         return true;
@@ -98,5 +99,21 @@ class User extends \App\Core\Model
     public function setPassword(?string $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 }

@@ -48,17 +48,19 @@
             </ul>
             <?php if (\App\Models\User::isLogged()) {?>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="?c=home">Profil</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class = "conto" src="semestralka03/opendoor.png" alt="Log out">
+                        <img class = "conto" src="semestralka03/setting.png" alt="Settings">
                     </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="?c=User&a=logout">Odhlasiť sa</a></li>
+                            <li><a class="dropdown-item" href="?c=Auth&a=changePasswordForm">Zmeniť heslo</a></li>
                             <li><a class="dropdown-item" href="?c=User&a=deactivate">Deaktivovať účet</a></li>
                         </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=User&a=logout">
+                        <img class = "conto" src="semestralka03/opendoor.png" alt="Log out">
+                    </a>
                 </li>
             </ul>
             <?php } else {?>

@@ -42,7 +42,8 @@ class AuthController extends AControllerRedirect
     {
         return $this->html(
             [
-                'error' => $this->request()->getValue('error')
+                'error' => $this->request()->getValue('error'),
+                'login' => $_SESSION['login']
             ]
         );
     }
@@ -79,7 +80,7 @@ class AuthController extends AControllerRedirect
                 $passwordAgain = $this->request()->getValue('passwordAgain');
                 //skontroluje rovnost hesiel
                 if ($password == $passwordAgain) {
-                    $registered = Auth::registation($login, $password);
+                    $registered = Auth::registation($name,$login, $password);
                     if ($registered) {
                         return $this->html(['error' => null,"login"=>$login],'loginForm');
                     } else {
