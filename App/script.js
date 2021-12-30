@@ -120,3 +120,7 @@ function checkMessage()
     }
     document.getElementById("messageOk").innerHTML = popis;
 }
+
+
+
+

@@ -18,25 +18,25 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="semestralka/poledance.png" class="d-block w-100" alt="Pole Dance">
+            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Pole Dance">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Pole Dance</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="semestralka/poledance.png" class="d-block w-100" alt="Aerial Hoop">
+            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Aerial Hoop">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Aerial Hoop</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="semestralka/poledance.png" class="d-block w-100" alt="Aerial Silk">
+            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Aerial Silk">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Aerial Silk</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="semestralka/poledance.png" class="d-block w-100" alt="Flexi">
+            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Flexi">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Flexi</h5>
             </div>
@@ -72,6 +72,13 @@
                 <div class="col-12 col-md-6">
                     <h5><?= $reviews->getAuthor() ?> </h5>
                     <p> <?= $reviews->getText() ?> </p>
+                </div>
+                <div class="col-12 col-md-1">
+                    <?php if (\App\Models\User::isLogged()) {?>
+                    <a href="?c=review&a=deleteReview&id=<?= $reviews->id ?>" class="btn btn-outline-warning" >
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                    <?php } ?>
                 </div>
             </div>
         <?php } ?>
