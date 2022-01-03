@@ -11,13 +11,14 @@ class User extends \App\Core\Model
         public ?string $email = null,
         public ?string $password = null,
         public ?string $name = null,
+        public int $type = 0,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id', 'email', 'password','name'];
+        return ['id', 'email', 'password','name','type'];
     }
 
     static public function setTableName()
@@ -37,6 +38,7 @@ class User extends \App\Core\Model
         //zrusim session a aplikacia sa bdue tvarit, ze nikto nie je prihlaseny
         unset($_SESSION['login']);
         unset($_SESSION['id']);
+        unset($_SESSION['type']);
         session_destroy();
     }
 
@@ -48,8 +50,19 @@ class User extends \App\Core\Model
         $user->delete();
         unset($_SESSION['login']);
         unset($_SESSION['id']);
+        unset($_SESSION['type']);
         session_destroy();
         return true;
+    }
+
+    public static function isTrainer()
+    {
+        if ($_SESSION['type'] == 1)
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -115,5 +128,22 @@ class User extends \App\Core\Model
     public function setName(?string $name): void
     {
         $this->name = $name;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType(int $type): void
+    {
+        $this->type = $type;
     }
 }

@@ -59,6 +59,7 @@ class Auth
                 $_SESSION['id'] = $person[0]->id;
                 $_SESSION['name'] = $person[0]->getName();
                 $_SESSION['hodnotenie'] = 0;
+                $_SESSION['type'] = $person[0]->getType();
                 return true;
             } else {
                 return false;

@@ -36,9 +36,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="?c=home&a=trenerky">Trenerky</a>
                 </li>
+                <?php if (\App\Models\User::isLogged()) {?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Rozvrh</a>
+                    <a class="nav-link" href="?c=course&a=lekcie">Lekcie</a>
                 </li>
+                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Cenník</a>
                 </li>
@@ -79,6 +81,7 @@
 <div class="page-container">
 
     <?= $contentHTML ?>
+
 
 <div class="pata">
     <a class="navigacia" href="https://www.instagram.com/poledancezilina/">

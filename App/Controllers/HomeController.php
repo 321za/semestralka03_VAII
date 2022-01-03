@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use App\Auth;
 use App\Config\Configuration;
+use App\Models\Course;
 use App\Models\Trainer;
-use App\Models\Reviews;
+use App\Models\Review;
 use App\Core\DB\DebugStatement;
 
 /**
@@ -18,7 +19,7 @@ class HomeController extends AControllerRedirect
 
     public function index()
     {
-        $reviews = Reviews::getAll();
+        $reviews = Review::getAll();
         return $this->html(
             [
                 'warning' => $this->request()->getValue('warning'),
@@ -73,10 +74,13 @@ class HomeController extends AControllerRedirect
         $this->redirect('home','trenerky');
     }
 
+
     public function kontakt()
     {
         return $this->html();
     }
+
+
 
 
 

@@ -6,7 +6,7 @@ use App\Core\DB\Connection;
 use App\Core\Model;
 
 
-class Reviews extends \App\Core\Model
+class Review extends \App\Core\Model
 {
 
     public function __construct(
