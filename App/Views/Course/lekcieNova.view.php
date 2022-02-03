@@ -6,6 +6,13 @@
     <?php if (\App\Models\User::isLogged()) {?>
         <?php if (\App\Models\User::isTrainer()) {?>
             <form name="form4" method="post" action="?c=course&a=pridat">
+                <label>Typ Kurzu:</label>
+                <select id="typKurzu" name="typKurzu" >
+                    <option value=1>Pole dance</option>
+                    <option  value=2>Aerial Hoop</option>
+                    <option  value=3>Aerial Silk</option>
+                    <option  value=4>Flexi joga</option>
+                </select>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="fcf-form-group">

@@ -7,9 +7,13 @@
         <p>Pole Dance si získava stále vačšiu obľubu nielen u žien, ale aj u mužov. Nemá žiadne vekové ani váhové obmedzenia. Svaly sa precvičujú a zosilňujú postupne, preto akékoľvek obavy nie sú na mieste. Dôležitá je vytrvalosť a tréning. Zaručeným výsledkom je nielen spevnená a tvarovaná postava, precvičenie každého svalu na tele, ale aj maximálne nabitie sa pozitívnou energiou, zvýšenie sebavedomia, neustále prekračovanie vlastných hraníc, radosť z nepoznaných schopností vlastného tela, chuť a motivácia k väčšej starostlivosti o telo a zdravie.<br></p>
         <p class="cena">Cena skúšobnej hodiny: 6€<br>Cena za kurz: 72€/10h</p>
         <?php if (\App\Models\User::isLogged()) {?>
+            <?php if (!\App\Models\User::isTrainer()) {?>
         <div class="mb-3">
-            <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" >Chcem si vyskúšať</button>
+            <a href="?c=course&a=lekciePoleDance" >
+                <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Chcem si vyskúšať</button>
+            </a>
         </div>
+            <?php } ?>
         <?php } ?>
     </div>
     <div class="row">

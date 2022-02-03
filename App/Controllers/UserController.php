@@ -28,4 +28,9 @@ class UserController extends AControllerRedirect
         $this->redirect('home','index',['warning' => 'Účet bol úspešne deaktivovaný']);
     }
 
+    public function calendar()
+    {
+        $this->redirect('home');
+    }
+
 }

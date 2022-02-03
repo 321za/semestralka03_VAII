@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <title>Fitness Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="semestralka03/App/script.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="semestralka03/index1.css" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+
+    <!-- jQuery library
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>-->
+
+    <!-- Latest minified bootstrap js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="semestralka03/App/script.js"></script>
 </head>
 <body>
+
+
 
 <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top">
     <div class="container-fluid">
@@ -49,7 +61,14 @@
                 </li>
             </ul>
             <?php if (\App\Models\User::isLogged()) {?>
-            <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <img class = "conto" src="semestralka03/calendar.png" alt="Calendar">
+                    </a>
+                </li>
+
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class = "conto" src="semestralka03/setting.png" alt="Settings">
@@ -74,13 +93,18 @@
                     </li>
                 </ul>
             <?php } ?>
+            <button class="mode" onclick="setMode()" >
+                <i class="bi bi-brightness-high-fill"></i>
+            </button>
         </div>
     </div>
 </nav>
 
 <div class="page-container">
 
+
     <?= $contentHTML ?>
+
 
 
 <div class="pata">

@@ -5,7 +5,9 @@
     <h5>Úprava:</h5>
     <?php if (\App\Models\User::isLogged()) {?>
     <?php if (\App\Models\User::isTrainer()) {?>
+
             <form name="form4" method="post" action="?c=course&a=ulozitZmeny">
+                <input type="hidden" name="id" value="<?= @$data['id']?>">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="fcf-form-group">
@@ -35,7 +37,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Uložiť zmeny</button>
+                        <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Uložiť zmeny</button>
                 </div>
             </form>
     <?php } ?>

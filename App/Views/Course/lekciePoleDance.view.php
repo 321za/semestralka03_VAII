@@ -29,8 +29,8 @@
                             <p idCapacity="<?= $courses->getCapacity() ?>"> <?= $courses->getCapacity() ?> </p>
                         </td>
                         <td>
-                            <a href="?c=course&a=update&id=<?= $courses->id ?>">
-                                <button id="uprava" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"  >Upraviť</button>
+                            <a>
+                                <button id="uprava" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block editButton" dataId="<?php echo $courses->getId() ?>" data-bs-toggle="modal" data-bs-target="#myModal" >Upraviť</button>
                             </a>
                         </td>
                         <td>

@@ -1,3 +1,136 @@
+
+
+
+function setMode() {
+    let pinkMode = localStorage.getItem('pinkMode');
+    console.log(localStorage.getItem('pinkMode'));
+
+    if (pinkMode === 'pink') {
+        $('body').removeClass('normal');
+        $('body').addClass("pink");
+        localStorage.setItem('pinkMode', 'normal');
+        console.log(localStorage.getItem('pinkMode'));
+    } else {
+        $('body').removeClass('pink');
+        $('body').addClass("normal");
+        localStorage.setItem('pinkMode', 'pink');
+        console.log(localStorage.getItem('pinkMode'));
+    }
+}
+
+$(document).ready(function (){
+    if (localStorage.getItem('pinkMode') == 'pink') {
+        $('body').removeClass('pink');
+        $('body').addClass("normal");
+    } else {
+        $('body').removeClass('normal');
+        $('body').addClass("pink");
+    }
+
+    $('#form4').submit(function (e){
+        e.preventDefault();
+
+        let text = $('#text').val();
+
+        $.ajax({
+            type: "POST",
+            url: 'http://localhost/semestralka03?c=review&a=addReview',
+            data: {
+                text: text,
+            },
+            success: function (data){
+                let jsonData = JSON.parse(data);
+                if (jsonData.name != "")
+                {
+                    alert(jsonData.name + " " + text);
+                    $('#tableReview').append("<tr><td>" + "<h5>"+ jsonData.name +"<h5>"+ "</td><td>" + "<p>"+text +"</p>" + '</td><td><button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" ><i class="bi bi-trash-fill"></i></button></td></tr>');
+
+                } else {
+                    alert("Nepodarilo sa pridat recenziu!");
+                }
+            },
+            error: function (){
+                alert("ERROR");
+            }
+        })
+        $('#myModal').modal('hide');
+
+    })
+});
+
+
+$(document).ready(function() {
+    $(document).on('click', '.delBut', function () {
+        let del_id = $(this).attr('dataId');
+        /**
+         * Metóda closestvráti prvého predka vybraného prvku
+         */
+        let tr = $(this).closest('tr');
+
+
+        $.ajax({
+            method: 'POST',
+            url: 'http://localhost/semestralka03?c=review&a=deleteReview',
+            data: {
+                deleteItem: del_id,
+            },
+            success: function (data) {
+                let jsonData = JSON.parse(data);
+
+                if (jsonData === 1)
+                {
+                    tr.fadeOut(1000, function(){
+                        $(this).remove();
+                    });
+                } else {
+                    alert("Nemôžeš vymazať cudziu recenziu!");
+                }
+            }
+        })
+    })
+})
+
+
+
+
+
+$(document).ready(function() {
+    $(document).on('click', '.editButton', function (e) {
+        e.preventDefault();
+        let edit_id = $(this).attr('dataId');
+        let caption = $('#idCaption').val();
+        let time = $(this).attr('idTime');
+        let capacity = $(this).attr('idCapacity');
+        let info = $(this).attr('idInfo');
+
+
+        $.ajax({
+            url: 'http://localhost/semestralka03?c=course&a=ulozZmeny',
+            method: "POST",
+            data: {id: edit_id,
+                    caption :caption,
+                    capacity:capacity,
+            time:time,
+            info:info,
+            },
+            beforeSend: function () {
+                $('.modal-body #caption').val(caption);
+                $('.modal-body #capacity').val(capacity);
+                $('.modal-body #time').val(time);
+                $('.modal-body #info').val(info);
+                $('#myModal').modal('show');
+            },
+            success: function (data) {
+                $('.modal-body').html(data);
+                $('#myModal').modal('show');
+            }
+        })
+    })
+})
+
+
+
+
 function validateName()
 {
     let name =  document.getElementById("nameValid");
@@ -122,5 +255,6 @@ function checkMessage()
 }
 
 
+//-----------------------------------------------------------------------------
 
 

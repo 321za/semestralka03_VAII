@@ -23,9 +23,52 @@ class CourseController extends AControllerRedirect
     {
         $courses = Course::getAll();
         return $this->html(
-            ['courses' => $courses]
+            [   'warning' => $this->request()->getValue('warning'),
+                'courses' => $courses]
         );
     }
+
+    public function lekciePoleDance()
+    {
+        $courses = Course::getAll('typKurzu = ?', [1]);
+
+        return $this->html(
+            [   'warning' => $this->request()->getValue('warning'),
+                'courses' => $courses]
+        );
+    }
+
+    public function lekcieAerialHoop()
+    {
+        $courses = Course::getAll('typKurzu = ?', [2]);
+
+        return $this->html(
+            [   'warning' => $this->request()->getValue('warning'),
+                'courses' => $courses]
+        );
+    }
+
+    public function lekcieAerialSilk()
+    {
+        $courses = Course::getAll('typKurzu = ?', [3]);
+
+        return $this->html(
+            [   'warning' => $this->request()->getValue('warning'),
+                'courses' => $courses]
+        );
+    }
+
+    public function lekcieFlexiJoga()
+    {
+        $courses = Course::getAll('typKurzu = ?', [4]);
+
+        return $this->html(
+            [   'warning' => $this->request()->getValue('warning'),
+                'courses' => $courses]
+        );
+    }
+
+
 
     public function lekcieNova()
     {
@@ -37,14 +80,15 @@ class CourseController extends AControllerRedirect
     {
         $id = $this->request()->getValue('id');
         $course = Course::getOne($id);
-        $capacity = $course->getId();
+        $capacity = $course->getCapacity();
         if ($capacity > 0)
         {
             $course->capacity -= 1;
             //UPDATE
             $course->save();
         } else {
-            //co ak kapacita je 0
+            $courses = Course::getAll();
+            return $this->html( ['warning' => 'Nie je uz volne miesto.','courses' => $courses],'lekcie');
         }
         $this->redirect('course','lekcie');
     }
@@ -92,6 +136,7 @@ class CourseController extends AControllerRedirect
         //UPDATE
         $course->save();
         $this->redirect('course', 'lekcie');
+        return $this->json('1');
     }
 
     public function pridat()
@@ -100,11 +145,13 @@ class CourseController extends AControllerRedirect
         $capacity = $this->request()->getValue('capacity');
         $time = $this->request()->getValue('time');
         $info = $this->request()->getValue('info');
+        $typKurzu = $this->request()->getValue('typKurzu');
         $new = new Course();
         $new->setCapacity($capacity);
         $new->setCaption($caption);
         $new->setTime($time);
         $new->setInfo($info);
+        $new->setTypKurzu($typKurzu);
         //INSERT
         $new->save();
         $this->redirect('course', 'lekcie');

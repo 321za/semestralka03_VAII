@@ -65,6 +65,16 @@ class User extends \App\Core\Model
         }
     }
 
+    public static function isUser()
+    {
+        if ($_SESSION['type'] == 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * @return int

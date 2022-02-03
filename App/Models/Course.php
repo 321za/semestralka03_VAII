@@ -12,14 +12,15 @@ class Course extends \App\Core\Model
         public ?string $caption = null,
         public int $capacity = 0,
         public ?string $time = null,
-        public ?string $info = null
+        public ?string $info = null,
+        public int $typKurzu = 0,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id', 'caption','capacity','time','info'];
+        return ['id', 'caption','capacity','time','info', 'typKurzu'];
     }
 
     static public function setTableName()
@@ -105,6 +106,22 @@ class Course extends \App\Core\Model
     public function setInfo(?string $info): void
     {
         $this->info = $info;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypKurzu(): int
+    {
+        return $this->typKurzu;
+    }
+
+    /**
+     * @param int $typKurzu
+     */
+    public function setTypKurzu(int $typKurzu): void
+    {
+        $this->typKurzu = $typKurzu;
     }
 
 }

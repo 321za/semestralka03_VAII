@@ -15,7 +15,7 @@ class ReviewController extends AControllerRedirect
 
     public function addReview()
     {
-        $text = $this->request()->getValue('mes');
+        /**$text = $this->request()->getValue('mes');
         if (strlen($text) > 10) {
             $new = new Review();
             $new->setText($text);
@@ -23,21 +23,32 @@ class ReviewController extends AControllerRedirect
             //INSERT
             $new->save();
         }
-        $this->redirect('home');
+        $this->redirect('home');**/
+        if (isset($_POST['text'])) {
+            $new = new Review();
+            $text = strip_tags($_POST['text']);
+            $new->setText($text);
+            $new->setAuthor($_SESSION['name']);
+            $new->save();
+            return $this->json('{"name":"'.$_SESSION['name'].'"}');
+        } else {
+            return $this->json('');
+        }
+
+
     }
 
     public function deleteReview()
     {
-        $id = $this->request()->getValue('id');
-        $review = Review::getOne($id);
-        if ($review->getAuthor() == $_SESSION['name'])
+        $delItem = intval($this->request()->getValue('deleteItem'));
+        $delReview = Review::getOne($delItem);
+        if ($delReview->getAuthor() == $_SESSION['name'])
         {
             //DELETE
-            $review->delete();
-            $this->redirect('home');
+            $delReview->delete();
+            return $this->json('1');
         } else {
-            $this->redirect('home', 'index', ['warning' => 'Môžeš mazať iba vlastné recenzie!']);
+            return $this->json('0');
         }
-
     }
 }

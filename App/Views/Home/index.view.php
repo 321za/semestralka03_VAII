@@ -9,6 +9,7 @@
 <?php } ?>
 
 
+
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -52,6 +53,8 @@
     </button>
 </div>
 
+
+
 <div class="container">
     <h4>NIEČO MÁLO</h4>
     <h1>O NÁS</h1>
@@ -67,30 +70,79 @@
 
 <div class="container">
     <h1>ČO O NÁS POVEDALI</h1>
+
         <?php foreach ($data['reviews'] as $reviews) { ?>
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6">
+
+                <table id="tableReview" class="tableReview">
+                    <tbody id="tableBody">
+                    <tr>
+                        <td>
+                            <h5><?= $reviews->getAuthor() ?> </h5>
+                        </td>
+                        <td>
+                            <p> <?= $reviews->getText() ?> </p>
+                        </td>
+                        <td>
+                            <?php if (\App\Models\User::isLogged()) {?>
+                                <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" >
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+
+                            <?php } ?>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+    <?php } ?>
+
+
+
+<!--
+            <div class="row align-items-center delItem">
+                <div class="col-11 ">
                     <h5><?= $reviews->getAuthor() ?> </h5>
                     <p> <?= $reviews->getText() ?> </p>
                 </div>
-                <div class="col-12 col-md-1">
+                <div class="col-1 ">
                     <?php if (\App\Models\User::isLogged()) {?>
-                    <a href="?c=review&a=deleteReview&id=<?= $reviews->id ?>" class="btn btn-outline-warning" >
-                        <i class="bi bi-trash-fill"></i>
-                    </a>
+                        <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" >
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+
                     <?php } ?>
                 </div>
             </div>
-        <?php } ?>
+
+        -->
+
 
     <?php if (\App\Models\User::isLogged()) {?>
-    <form name="form3" method="post" action="?c=review&a=addReview">
-    <div class="fcf-form-group">
-        <label>Hodnotenie:</label>
-        <textarea id="mess"  class="fcf-form-control"  onkeyup="checkMessage()" name="mes" required></textarea>
-        <p id="messageOk"></p>
-        <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odoslať hodnotenie</button>
-    </div>
-    </form>
+
+        <div>
+            <a>
+                <button id="recenziaPridat" name="recenziaPridat" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" data-bs-toggle="modal" data-bs-target="#myModal" >Pridat recenziu</button>
+            </a>
+        </div>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="form4" class="form4" method="post" >
+                    <div class="modal-body">
+                            <div class="fcf-form-group">
+                                <label>Hodnotenie:</label>
+                                <textarea id="text"   class="fcf-form-control text" name="text" required></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="submit" id="odoslatHodnotenie" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odoslať hodnotenie</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <?php } ?>
 </div>
