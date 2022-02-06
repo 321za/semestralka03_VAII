@@ -25,21 +25,21 @@
     </div>
     <div class="row">
         <div class="col-6 col-sm-4 ">
-            <img src="obrazok2.png" alt="obrazok">
+            <img src="semestralka03/AHclass03.jpg" alt="obrazok">
         </div>
         <div class="col-6 col-sm-4">
-            <img src="obrazok2.png" alt="obrazok">
+            <img src="semestralka03/AHclass04.jpg" alt="obrazok">
         </div>
         <div class="col col-sm-4">
-            <img src="obrazok2.png" alt="obrazok">
+            <img src="semestralka03/AHclass10.jpg" alt="obrazok">
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-6">
-            <img src="obrazok1.png" alt="obrazok">
+            <img src="semestralka03/AHclass14.jpg" alt="obrazok">
         </div>
         <div class="col-12 col-sm-6">
-            <img src="obrazok1.png" alt="obrazok">
+            <img src="semestralka03/AHclass13.jpg" alt="obrazok">
         </div>
     </div>
 </div>

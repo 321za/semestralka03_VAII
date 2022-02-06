@@ -10,9 +10,9 @@
 <div class="container">
     <h5>Vyskúšajte si niečo z naších lekcií:</h5>
     <?php if (\App\Models\User::isLogged()) {?>
-        <table id="tableCourses" class="tableCourses">
-        <tbody id="tableBody">
     <?php if (!\App\Models\User::isUser()) {?>
+            <table id="tableCourses" class="tableCourses">
+                <tbody id="tableBody">
             <?php foreach ($data['courses'] as $courses) { ?>
                     <tr>
                         <td>
@@ -46,10 +46,11 @@
     <?php } ?>
             </tbody>
             </table>
+    <?php if (\App\Models\User::isAdministrator()) {?>
             <a href="?c=course&a=lekcieNova">
                 <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"> Pridať novú lekciu</button>
             </a>
-
+            <?php } ?>
             <div class="modal fade" >
                 <div class="modal-dialog">
                     <div class="modal-content">

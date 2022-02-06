@@ -25,19 +25,19 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Aerial Hoop">
+            <img src="semestralka03/aerialHoop066.png" class="d-block w-100" alt="Aerial Hoop">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Aerial Hoop</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Aerial Silk">
+            <img src="semestralka03/aerialSilk05.jpg" class="d-block w-100" alt="Aerial Silk">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Aerial Silk</h5>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="semestralka03/poledance.png" class="d-block w-100" alt="Flexi">
+            <img src="semestralka03/flexi08.jpg" class="d-block w-100" alt="Flexi">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Flexi</h5>
             </div>
@@ -116,9 +116,7 @@
     <?php if (\App\Models\User::isLogged()) {?>
     <?php if (\App\Models\User::isUser()) {?>
         <div>
-            <a>
-                <button id="recenziaPridat" name="recenziaPridat" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" data-bs-toggle="modal" data-bs-target="#myModal" >Pridat recenziu</button>
-            </a>
+            <button id="recenziaPridat" name="recenziaPridat" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" data-bs-toggle="modal" data-bs-target="#myModal" >Pridat recenziu</button>
         </div>
     <?php } ?>
     <?php } ?>
