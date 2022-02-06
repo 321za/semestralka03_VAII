@@ -4,7 +4,7 @@
 <div class="container">
     <h5>Úprava:</h5>
     <?php if (\App\Models\User::isLogged()) {?>
-    <?php if (\App\Models\User::isTrainer()) {?>
+    <?php if (!\App\Models\User::isUser()) {?>
 
             <form name="form4" method="post" action="?c=course&a=ulozitZmeny">
                 <input type="hidden" name="id" value="<?= @$data['id']?>">

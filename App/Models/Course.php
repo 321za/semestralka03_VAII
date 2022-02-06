@@ -124,4 +124,21 @@ class Course extends \App\Core\Model
         $this->typKurzu = $typKurzu;
     }
 
+    public function getNazovTypu(): ?string
+    {
+        if ($this->getTypKurzu() == 1)
+        {
+            return "Pole dance";
+        } else if ($this->getTypKurzu() == 2)
+        {
+            return "Aerial hoop";
+        } else if ($this->getTypKurzu() == 3)
+        {
+            return "Aerial silk";
+        } else
+        {
+            return "Flexi joga";
+        }
+    }
+
 }

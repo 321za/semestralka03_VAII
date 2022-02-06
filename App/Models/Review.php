@@ -13,13 +13,14 @@ class Review extends \App\Core\Model
         public int     $id = 0,
         public ?string $text = null,
         public ?string $author = null,
+        public ?string $email = null,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id', 'text','author'];
+        return ['id', 'text','author','email'];
     }
 
     static public function setTableName()
@@ -73,5 +74,21 @@ class Review extends \App\Core\Model
     public function setAuthor(?string $author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     */
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
     }
 }

@@ -23,7 +23,9 @@
                 <div class="mb-3">
                     <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" value"Login">Prihlásiť</button>
                 </div>
-                <a href="?c=Auth&a=registrationForm" class="btn btn-success">Vytvoriť účet</a>
+                <div>
+                    <a href="?c=Auth&a=registrationForm" class="register">Vytvoriť nový účet</a>
+                </div>
             </form>
         </div>
     </div>

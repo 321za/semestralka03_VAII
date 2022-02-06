@@ -55,6 +55,16 @@ class User extends \App\Core\Model
         return true;
     }
 
+    public static function isUser()
+    {
+        if ($_SESSION['type'] == 0)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function isTrainer()
     {
         if ($_SESSION['type'] == 1)
@@ -65,9 +75,9 @@ class User extends \App\Core\Model
         }
     }
 
-    public static function isUser()
+    public static function isAdministrator()
     {
-        if ($_SESSION['type'] == 0)
+        if ($_SESSION['type'] == 2)
         {
             return true;
         } else {

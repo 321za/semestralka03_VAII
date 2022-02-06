@@ -11,28 +11,31 @@
     <h5>Tvoje naplánované lekcie:</h5>
     <?php if (\App\Models\User::isLogged()) {?>
         <?php if (!\App\Models\User::isTrainer()) {?>
+            <table id="tableCourses" class="tableCourses">
+            <tbody id="tableBody">
             <?php foreach ($data['courses'] as $courses) { ?>
-                <table id="tableCourses" class="tableCourses">
-                    <tbody id="tableBody">
                     <tr>
-                        <td idCaption="<?= $courses->getCaption() ?>">
-                            <h5  ><?= $courses->getCaption() ?></h5>
+                        <td>
+                            <h5 class="nazovTypu"><?= $courses->getNazovTypu() ?> </h5>
+                        </td>
+                        <td>
+                            <h5><?= $courses->getCaption() ?></h5>
                         </td>
                         <td >
-                            <p idInfo="<?= $courses->getInfo() ?>"><?= $courses->getInfo() ?></p>
+                            <p><?= $courses->getInfo() ?></p>
                         </td>
                         <td>
-                            <p idTime="<?= $courses->getTime() ?>"> <?= $courses->getTime() ?> </p>
+                            <p > <?= $courses->getTime() ?> </p>
                         </td>
                         <td>
-                            <a href="?c=course&a=delete&id=<?= $courses->id ?>">
+                            <a href="?c=course&a=increaseCapacity&id=<?= $courses->id ?>">
                                 <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odhlásiť sa</button>
                             </a>
                         </td>
                     </tr>
-                    </tbody>
-                </table>
             <?php } ?>
+            </tbody>
+            </table>
         <?php } ?>
     <?php } ?>
 </div>

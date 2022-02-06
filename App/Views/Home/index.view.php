@@ -70,79 +70,92 @@
 
 <div class="container">
     <h1>ČO O NÁS POVEDALI</h1>
-
+    <div style="overflow-x: auto;">
+        <table id="tableReview" class="tableReview">
+            <tbody id="tableBody">
         <?php foreach ($data['reviews'] as $reviews) { ?>
 
-                <table id="tableReview" class="tableReview">
-                    <tbody id="tableBody">
                     <tr>
                         <td>
                             <h5><?= $reviews->getAuthor() ?> </h5>
                         </td>
-                        <td>
-                            <p> <?= $reviews->getText() ?> </p>
+                        <td class="textR">
+                            <p id="tr<?php echo $reviews->getId() ?>"> <?= $reviews->getText() ?> </p>
                         </td>
-                        <td>
                             <?php if (\App\Models\User::isLogged()) {?>
-                                <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" >
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-
-                            <?php } ?>
+                            <?php if (\App\Models\User::isAdministrator()) {?>
+                                    <td>
+                                        <button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" >
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </td>
+                                <?php } ?>
+                            <?php if (\App\Models\User::isUser()) {?>
+                            <?php if ($reviews->getEmail() === $_SESSION['login']) {?>
+                                        <td>
+                                            <button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" >
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </td>
+                        <td>
+                                    <button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block editBut" dataId="<?php echo $reviews->getId() ?>" text="<?= $reviews->getText() ?>"  data-bs-toggle="modal" data-bs-target="#myModalEdit" >
+                                        <i class="bi bi-vector-pen"></i>
+                                    </button>
                         </td>
+                            <?php } ?>
+                            <?php } ?>
+                            <?php } ?>
                     </tr>
-
+        <?php } ?>
                     </tbody>
                 </table>
+    </div>
 
-    <?php } ?>
-
-
-
-<!--
-            <div class="row align-items-center delItem">
-                <div class="col-11 ">
-                    <h5><?= $reviews->getAuthor() ?> </h5>
-                    <p> <?= $reviews->getText() ?> </p>
-                </div>
-                <div class="col-1 ">
-                    <?php if (\App\Models\User::isLogged()) {?>
-                        <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" >
-                            <i class="bi bi-trash-fill"></i>
-                        </button>
-
-                    <?php } ?>
-                </div>
-            </div>
-
-        -->
 
 
     <?php if (\App\Models\User::isLogged()) {?>
-
+    <?php if (\App\Models\User::isUser()) {?>
         <div>
             <a>
                 <button id="recenziaPridat" name="recenziaPridat" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" data-bs-toggle="modal" data-bs-target="#myModal" >Pridat recenziu</button>
             </a>
         </div>
-
-        <!-- The Modal -->
+    <?php } ?>
+    <?php } ?>
         <div class="modal fade" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="form4" class="form4" method="post" >
                     <div class="modal-body">
                             <div class="fcf-form-group">
                                 <label>Hodnotenie:</label>
-                                <textarea id="text"   class="fcf-form-control text" name="text" required></textarea>
+                                <textarea id="text" class="fcf-form-control text" name="text" required></textarea>
                             </div>
                     </div>
                     <div class="modal-footer">
-                            <button type="submit" id="odoslatHodnotenie" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odoslať hodnotenie</button>
+                            <button id="odoslatHodnotenie" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block odoslatHodnotenie">Odoslať hodnotenie</button>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    <?php } ?>
+
+
+        <div class="modal fade" id="myModalEdit">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                        <div class="modal-body">
+                            <div class="fcf-form-group">
+                                <label>Hodnotenie:</label>
+                                <input type="hidden" id="hiddenID" name="hiddenID">
+                                <textarea id="textE" class="fcf-form-control textE" name="textE" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="upravitHodnotenie" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block" onclick="uloz()">Upraviť</button>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
 </div>

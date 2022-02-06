@@ -25,6 +25,10 @@ body {
     margin-left: 1vw;
 }
 
+.adminBut {
+    width: 15vw;
+}
+
 @media (max-width: 992px) {
     div.medzera{
             margin-top: 7vw;
@@ -51,6 +55,10 @@ body {
     .mode {
         margin-left: 0vw;
     }
+    .adminBut {
+        width: 20vw;
+    }
+
 }
 
 .navbar {
@@ -75,6 +83,25 @@ body {
 .conto {
     width: 30px;
 }
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+}
+
+
+th, td {
+    padding: 8px;
+}
+
+.textR{
+    text-align: left;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
 
 .pata {
      margin-top: 5vh;
@@ -124,6 +151,10 @@ h4 {
 
 h5 {
      color: var(--main-bg-color);
+}
+
+.nazovTypu {
+    color: var(--main-bg);
 }
 
 p {
@@ -183,6 +214,12 @@ img {
     color: var(--main-bg-color);
     background-color: #e6e6e6;
     border-color: var(--main-bg-color);
+}
+
+.register {
+    color: var(--main-bg);
+    border-color:var(--main-bg);
+    border: #00b3b3;
 }
 
 .klikni {

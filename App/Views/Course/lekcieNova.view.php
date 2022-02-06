@@ -3,8 +3,7 @@
 
 <div class="container">
     <h5>Pridať:</h5>
-    <?php if (\App\Models\User::isLogged()) {?>
-        <?php if (\App\Models\User::isTrainer()) {?>
+        <?php if (\App\Models\User::isAdministrator()) {?>
             <form name="form4" method="post" action="?c=course&a=pridat">
                 <label>Typ Kurzu:</label>
                 <select id="typKurzu" name="typKurzu" >
@@ -46,5 +45,4 @@
                 </div>
             </form>
         <?php } ?>
-    <?php } ?>
 </div>

@@ -20,6 +20,7 @@ class HomeController extends AControllerRedirect
     public function index()
     {
         $reviews = Review::getAll();
+
         return $this->html(
             [
                 'warning' => $this->request()->getValue('warning'),

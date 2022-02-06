@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\Responses\Response;
+use App\Courses;
 use App\Models\Course;
+use App\Models\ListOfUser;
 
 class CourseController extends AControllerRedirect
 {
@@ -76,21 +78,44 @@ class CourseController extends AControllerRedirect
         );
     }
 
+
+
     public function decreaseCapacity()
     {
-        $id = $this->request()->getValue('id');
-        $course = Course::getOne($id);
+        $idKurzu = $this->request()->getValue('id');
+        $course = Course::getOne($idKurzu);
         $capacity = $course->getCapacity();
         if ($capacity > 0)
         {
-            $course->capacity -= 1;
-            //UPDATE
-            $course->save();
+            $user = $_SESSION['login'];
+            if (Courses::accept($idKurzu,$user))
+            {
+                $course->capacity -= 1;
+                //UPDATE
+                $course->save();
+                $this->redirect('course', 'lekcie', ['warning' => 'Úspešne prihlásenie na hodinu.']);
+            } else {
+                $this->redirect('course', 'lekcie', ['warning' => 'Na hodinu si už prihlásený.']);
+            }
         } else {
-            $courses = Course::getAll();
-            return $this->html( ['warning' => 'Nie je uz volne miesto.','courses' => $courses],'lekcie');
+            $this->redirect('course', 'lekcie', ['warning' => 'Nie je už voľné miesto.']);
         }
-        $this->redirect('course','lekcie');
+    }
+
+
+    public function increaseCapacity()
+    {
+        $idKurzu = $this->request()->getValue('id');
+        $course = Course::getOne($idKurzu);
+        $capacity = $course->getCapacity();
+        $user = $_SESSION['login'];
+            if (Courses::delete($idKurzu,$user))
+            {
+                $course->capacity += 1;
+                //UPDATE
+                $course->save();
+                $this->redirect('user', 'calendar', ['warning' => 'Úspešne odhlásenie.']);
+            }
     }
 
     public function delete()
@@ -100,7 +125,6 @@ class CourseController extends AControllerRedirect
         //DELETE
         $course->delete();
         $this->redirect('course','lekcie');
-
     }
 
     public function update()

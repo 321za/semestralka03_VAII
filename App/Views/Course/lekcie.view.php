@@ -10,27 +10,29 @@
 <div class="container">
     <h5>Vyskúšajte si niečo z naších lekcií:</h5>
     <?php if (\App\Models\User::isLogged()) {?>
-
-    <?php if (\App\Models\User::isTrainer()) {?>
+        <table id="tableCourses" class="tableCourses">
+        <tbody id="tableBody">
+    <?php if (!\App\Models\User::isUser()) {?>
             <?php foreach ($data['courses'] as $courses) { ?>
-                <table id="tableCourses" class="tableCourses">
-                    <tbody id="tableBody">
                     <tr>
-                        <td idCaption="<?= $courses->getCaption() ?>">
-                            <h5  ><?= $courses->getCaption() ?></h5>
+                        <td>
+                            <h5 class="nazovTypu"><?= $courses->getNazovTypu() ?> </h5>
+                        </td>
+                        <td>
+                            <h5><?= $courses->getCaption() ?></h5>
                         </td>
                         <td >
-                            <p idInfo="<?= $courses->getInfo() ?>"><?= $courses->getInfo() ?></p>
+                            <p><?= $courses->getInfo() ?></p>
                         </td>
                         <td>
-                            <p idTime="<?= $courses->getTime() ?>"> <?= $courses->getTime() ?> </p>
+                            <p> <?= $courses->getTime() ?> </p>
                         </td>
                         <td>
-                            <p idCapacity="<?= $courses->getCapacity() ?>"> <?= $courses->getCapacity() ?> </p>
+                            <p> <?= $courses->getCapacity() ?> </p>
                         </td>
                         <td>
                             <a href="?c=course&a=update&id=<?= $courses->id ?>">
-                                <button id="uprava" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"  >Upraviť</button>
+                                <button id="uprava" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Upraviť</button>
                             </a>
                         </td>
                         <td>
@@ -40,43 +42,15 @@
                         </td>
                     </tr>
 
-                    </tbody>
-                </table>
 
-
-
-               <!--
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-4">
-                        <h5 idCaption="<?= $courses->getCaption() ?>" ><?= $courses->getCaption() ?></h5>
-                        <p info="info"><?= $courses->getInfo() ?></p>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <p time="time"> <?= $courses->getTime() ?> </p>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <p capacity="capacity"> <?= $courses->getCapacity() ?> </p>
-                    </div>
-                    <div class="col-12 col-md-1">
-                        <a>
-                            <button id="uprava" type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block editButton" data-id="<?php echo $courses->getId() ?>" data-bs-toggle="modal" data-bs-target="#myModal" >Upraviť</button>
-                        </a>
-                    </div>
-                    <div class="col-12 col-md-1">
-                        <a href="?c=course&a=delete&id=<?= $courses->id ?>">
-                            <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odstrániť</button>
-                        </a>
-                    </div>
-                </div>
-                -->
     <?php } ?>
+            </tbody>
+            </table>
             <a href="?c=course&a=lekcieNova">
                 <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block"> Pridať novú lekciu</button>
             </a>
 
-
-            <!-- The Modal -->
-            <div class="modal fade" id="myModal">
+            <div class="modal fade" >
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form name="form5" method="post">
@@ -107,9 +81,8 @@
                                     </div>
 
                         </div>
-
-                        <div class="modal-footer">
-                            <a href ='#' id="save">
+                        <div>
+                            <a>
                             <button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Uložiť zmeny</button>
                             </a>
                         </div>
@@ -119,17 +92,22 @@
             </div>
     <?php } ?>
 
-    <?php if (!\App\Models\User::isTrainer()) {?>
+    <?php if (\App\Models\User::isUser()) {?>
             <?php foreach ($data['courses'] as $courses) { ?>
                 <div class="row align-items-center">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-2">
+                        <h5 class="nazovTypu"><?= $courses->getNazovTypu() ?> </h5>
+                    </div>
+                    <div class="col-12 col-md-2">
                         <h5><?= $courses->getCaption() ?> </h5>
+                    </div>
+                    <div class="col-12 col-md-3">
                         <p><?= $courses->getInfo() ?></p>
                     </div>
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-2">
                         <p> <?= $courses->getTime() ?> </p>
                     </div>
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-1">
                         <p> <?= $courses->getCapacity() ?> </p>
                     </div>
                 <div class="col-12 col-md-2">

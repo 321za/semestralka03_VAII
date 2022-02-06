@@ -15,22 +15,26 @@ class ReviewController extends AControllerRedirect
 
     public function addReview()
     {
-        /**$text = $this->request()->getValue('mes');
-        if (strlen($text) > 10) {
-            $new = new Review();
-            $new->setText($text);
-            $new->setAuthor($_SESSION['name']);
-            //INSERT
-            $new->save();
-        }
-        $this->redirect('home');**/
         if (isset($_POST['text'])) {
             $new = new Review();
             $text = strip_tags($_POST['text']);
             $new->setText($text);
             $new->setAuthor($_SESSION['name']);
+            $new->setEmail($_SESSION['login']);
             $new->save();
-            return $this->json('{"name":"'.$_SESSION['name'].'"}');
+
+            $review = Review::getAll('email = ?', [$_SESSION['login']]);
+            foreach ($review as $r)
+            {
+                $rText = $r->getText();
+                if ($rText === $text)
+                {
+                    $id = $r->getId();
+                    return $this->json('{"name":"'.$_SESSION['name'].'", "id":"'.$id.'"}');
+                }
+            }
+
+
         } else {
             return $this->json('');
         }
@@ -42,13 +46,28 @@ class ReviewController extends AControllerRedirect
     {
         $delItem = intval($this->request()->getValue('deleteItem'));
         $delReview = Review::getOne($delItem);
-        if ($delReview->getAuthor() == $_SESSION['name'])
+        if ($delReview->getEmail() == $_SESSION['login'])
         {
             //DELETE
             $delReview->delete();
             return $this->json('1');
         } else {
             return $this->json('0');
+        }
+    }
+
+    public function editReview()
+    {
+        $editItem = intval($this->request()->getValue('editItem'));
+        $text = $this->request()->getValue('text');
+        $editReview = Review::getOne($editItem);
+        if ($editReview->getEmail() == $_SESSION['login'])
+        {
+            $editReview->setText($text);
+            $editReview->save();
+            return $this->json('{"text":"'.$text.'"}');
+        } else {
+            return $this->json('');
         }
     }
 }

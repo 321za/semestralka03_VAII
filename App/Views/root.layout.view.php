@@ -54,20 +54,25 @@
                 </li>
                 <?php } ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cenník</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="?c=home&a=kontakt">Kontakt</a>
                 </li>
             </ul>
             <?php if (\App\Models\User::isLogged()) {?>
                 <ul class="navbar-nav ml-auto">
+                    <?php if (!\App\Models\User::isAdministrator()) {?>
                 <li class="nav-item">
-                    <a class="nav-link">
+                    <a class="nav-link" href="?c=User&a=calendar">
                         <img class = "conto" src="semestralka03/calendar.png" alt="Calendar">
                     </a>
                 </li>
-
+                    <?php }?>
+                    <?php if (\App\Models\User::isAdministrator()) {?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?c=User&a=admin">
+                            <img class = "conto" src="semestralka03/person.png" alt="Person">
+                        </a>
+                    </li>
+                <?php }?>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

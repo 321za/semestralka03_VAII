@@ -1,20 +1,13 @@
-
-
-
 function setMode() {
     let pinkMode = localStorage.getItem('pinkMode');
-    console.log(localStorage.getItem('pinkMode'));
-
     if (pinkMode === 'pink') {
         $('body').removeClass('normal');
         $('body').addClass("pink");
         localStorage.setItem('pinkMode', 'normal');
-        console.log(localStorage.getItem('pinkMode'));
     } else {
         $('body').removeClass('pink');
         $('body').addClass("normal");
         localStorage.setItem('pinkMode', 'pink');
-        console.log(localStorage.getItem('pinkMode'));
     }
 }
 
@@ -27,8 +20,7 @@ $(document).ready(function (){
         $('body').addClass("pink");
     }
 
-    $('#form4').submit(function (e){
-        e.preventDefault();
+    $(document).on('click', '.odoslatHodnotenie', function () {
 
         let text = $('#text').val();
 
@@ -42,9 +34,8 @@ $(document).ready(function (){
                 let jsonData = JSON.parse(data);
                 if (jsonData.name != "")
                 {
-                    alert(jsonData.name + " " + text);
-                    $('#tableReview').append("<tr><td>" + "<h5>"+ jsonData.name +"<h5>"+ "</td><td>" + "<p>"+text +"</p>" + '</td><td><button type="submit" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="<?php echo $reviews->getId() ?>" ><i class="bi bi-trash-fill"></i></button></td></tr>');
-
+                    //alert(jsonData.name + " " + text + jsonData.id );
+                    $('#tableReview').append("<tr><td><h5>"+ jsonData.name +"<h5></td><td class='textR'><p id='tr'"+ jsonData.id+'">'+text +'</p></td><td><button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="'+ jsonData.id +'" ><i class="bi bi-trash-fill"></i></button></td></td><td> <button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block editBut" dataId="'+ jsonData.id +'"  text="'+ text +'"  data-bs-toggle="modal" data-bs-target="#myModalEdit" > <i class="bi bi-vector-pen"></i></button></td></tr>');
                 } else {
                     alert("Nepodarilo sa pridat recenziu!");
                 }
@@ -53,8 +44,8 @@ $(document).ready(function (){
                 alert("ERROR");
             }
         })
+        $('#text').val("");
         $('#myModal').modal('hide');
-
     })
 });
 
@@ -62,11 +53,7 @@ $(document).ready(function (){
 $(document).ready(function() {
     $(document).on('click', '.delBut', function () {
         let del_id = $(this).attr('dataId');
-        /**
-         * Metóda closestvráti prvého predka vybraného prvku
-         */
         let tr = $(this).closest('tr');
-
 
         $.ajax({
             method: 'POST',
@@ -92,41 +79,45 @@ $(document).ready(function() {
 
 
 
-
-
 $(document).ready(function() {
-    $(document).on('click', '.editButton', function (e) {
-        e.preventDefault();
+    $(document).on('click', '.editBut', function () {
         let edit_id = $(this).attr('dataId');
-        let caption = $('#idCaption').val();
-        let time = $(this).attr('idTime');
-        let capacity = $(this).attr('idCapacity');
-        let info = $(this).attr('idInfo');
+        let text = $(this).attr('text');
 
-
-        $.ajax({
-            url: 'http://localhost/semestralka03?c=course&a=ulozZmeny',
-            method: "POST",
-            data: {id: edit_id,
-                    caption :caption,
-                    capacity:capacity,
-            time:time,
-            info:info,
-            },
-            beforeSend: function () {
-                $('.modal-body #caption').val(caption);
-                $('.modal-body #capacity').val(capacity);
-                $('.modal-body #time').val(time);
-                $('.modal-body #info').val(info);
-                $('#myModal').modal('show');
-            },
-            success: function (data) {
-                $('.modal-body').html(data);
-                $('#myModal').modal('show');
-            }
-        })
+        $('.modal-body #textE').val(text);
+        $('.modal-body #hiddenID').val(edit_id);
+        $('#myModalEdit').modal('show');
     })
 })
+
+
+function uloz(){
+        let text = $('#textE').val();
+        let edit_id = $('#hiddenID').val();
+
+        $.ajax({
+            type: "POST",
+            url: 'http://localhost/semestralka03?c=review&a=editReview',
+            data: {
+                editItem: edit_id,
+                text: text,
+            },
+            success: function (data) {
+                let jsonData = JSON.parse(data);
+                if (jsonData.text != "")
+                {
+                    let edit_id = $('#hiddenID').val();
+                    $('.tableReview #tr'+edit_id).html(jsonData.text);
+                } else {
+                    alert("Nepodarilo sa upravit!");
+                }
+            },
+            error: function (){
+                alert("ERROR");
+            }
+        })
+        $('#myModalEdit').modal('hide');
+};
 
 
 
@@ -255,6 +246,6 @@ function checkMessage()
 }
 
 
-//-----------------------------------------------------------------------------
+
 
 
