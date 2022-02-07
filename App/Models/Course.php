@@ -10,17 +10,18 @@ class Course extends \App\Core\Model
     public function __construct(
         public int     $id = 0,
         public ?string $caption = null,
-        public int $capacity = 0,
+        public int     $capacity = 0,
         public ?string $time = null,
         public ?string $info = null,
-        public int $typKurzu = 0,
+        public int     $typKurzu = 0,
+        public int     $idTrener = 0,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id', 'caption','capacity','time','info', 'typKurzu'];
+        return ['id', 'caption', 'capacity', 'time', 'info', 'typKurzu','idTrener'];
     }
 
     static public function setTableName()
@@ -109,14 +110,6 @@ class Course extends \App\Core\Model
     }
 
     /**
-     * @return int
-     */
-    public function getTypKurzu(): int
-    {
-        return $this->typKurzu;
-    }
-
-    /**
      * @param int $typKurzu
      */
     public function setTypKurzu(int $typKurzu): void
@@ -126,19 +119,39 @@ class Course extends \App\Core\Model
 
     public function getNazovTypu(): ?string
     {
-        if ($this->getTypKurzu() == 1)
-        {
+        if ($this->getTypKurzu() == 1) {
             return "Pole dance";
-        } else if ($this->getTypKurzu() == 2)
-        {
+        } else if ($this->getTypKurzu() == 2) {
             return "Aerial hoop";
-        } else if ($this->getTypKurzu() == 3)
-        {
+        } else if ($this->getTypKurzu() == 3) {
             return "Aerial silk";
-        } else
-        {
+        } else {
             return "Flexi joga";
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypKurzu(): int
+    {
+        return $this->typKurzu;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdTrener(): int
+    {
+        return $this->idTrener;
+    }
+
+    /**
+     * @param int $idTrener
+     */
+    public function setIdTrener(int $idTrener): void
+    {
+        $this->idTrener = $idTrener;
     }
 
 }

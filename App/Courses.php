@@ -12,8 +12,7 @@ class Courses
     {
         $person = ListOfUser::getAll('user = ?', [$user]);
         $class = ListOfUser::getAll('idKurzu = ?', [$idKurzu]);
-        if (!($person && $class))
-        {
+        if (!($person && $class)) {
             $new = new ListOfUser();
             $new->setIdKurzu($idKurzu);
             $new->setUser($user);
@@ -28,11 +27,9 @@ class Courses
     public static function delete($idKurzu, $user)
     {
         $courses = ListOfUser::getAll('user = ?', [$_SESSION['login']]);
-        foreach ($courses as $c)
-        {
+        foreach ($courses as $c) {
             $cou = $c->getIdKurzu();
-            if ($cou == $idKurzu)
-            {
+            if ($cou == $idKurzu) {
                 $myclass = $c;
                 $id = $myclass->getId();
                 $user = ListOfUser::getOne($id);

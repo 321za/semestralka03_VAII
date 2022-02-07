@@ -9,15 +9,15 @@ class ListOfUser extends \App\Core\Model
 {
     public function __construct(
         public ?string $user = null,
-        public int $idKurzu = 0,
-        public int $id = 0,
+        public int     $idKurzu = 0,
+        public int     $id = 0,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['user', 'idKurzu','id'];
+        return ['user', 'idKurzu', 'id'];
     }
 
     static public function setTableName()

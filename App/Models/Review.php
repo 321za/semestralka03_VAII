@@ -20,7 +20,7 @@ class Review extends \App\Core\Model
 
     static public function setDbColumns()
     {
-        return ['id', 'text','author','email'];
+        return ['id', 'text', 'author', 'email'];
     }
 
     static public function setTableName()

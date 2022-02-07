@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Auth;
@@ -53,16 +54,16 @@ class AuthController extends AControllerRedirect
         $login = $this->request()->getValue('login');
         $password = $this->request()->getValue('password');
 
-            //ci je uzivatel prihlaseny alebo nie
-            $logged = Auth::login($login, $password);
-            if ($logged) {
-                //ak som prihlaseny vratim sa na home
-                $this->redirect('home', 'index', ['warning' => 'Vitaj!']);
-            } else {
-                //loginView lebo chcem aby sa uzivatelovi ukazal formular znova
-                $this->redirect('auth', 'loginForm', ['error' => 'Zlé meno alebo heslo']);
-            }
+        //ci je uzivatel prihlaseny alebo nie
+        $logged = Auth::login($login, $password);
+        if ($logged) {
+            //ak som prihlaseny vratim sa na home
+            $this->redirect('home', 'index', ['warning' => 'Vitaj!']);
+        } else {
+            //loginView lebo chcem aby sa uzivatelovi ukazal formular znova
+            $this->redirect('auth', 'loginForm', ['error' => 'Zlé meno alebo heslo']);
         }
+    }
 
 
     public function registration()
@@ -70,31 +71,31 @@ class AuthController extends AControllerRedirect
         $name = $this->request()->getValue('name');
         $surname = $this->request()->getValue('surname');
         if (Auth::validateName($name) && (Auth::validateName($surname))) {
-        $login = $this->request()->getValue('login');
-        //skontroluje spravnost emailu
-        if (Auth::validateEmail($login)) {
-            $password = $this->request()->getValue('password');
-            //skontroluje ci je dostatocne heslo
-            if (Auth::validatePassword($password)) {
-                $passwordAgain = $this->request()->getValue('passwordAgain');
-                //skontroluje rovnost hesiel
-                if ($password == $passwordAgain) {
-                    $registered = Auth::registation($name,$login, $password);
-                    if ($registered) {
-                        return $this->html(['error' => null,"login"=>$login],'loginForm');
+            $login = $this->request()->getValue('login');
+            //skontroluje spravnost emailu
+            if (Auth::validateEmail($login)) {
+                $password = $this->request()->getValue('password');
+                //skontroluje ci je dostatocne heslo
+                if (Auth::validatePassword($password)) {
+                    $passwordAgain = $this->request()->getValue('passwordAgain');
+                    //skontroluje rovnost hesiel
+                    if ($password == $passwordAgain) {
+                        $registered = Auth::registation($name, $login, $password);
+                        if ($registered) {
+                            return $this->html(['error' => null, "login" => $login], 'loginForm');
+                        } else {
+                            $this->redirect('auth', 'registrationForm', ['error' => 'Nepodarilo sa zaregistrovat, email sa už používa.']);
+                        }
                     } else {
-                        $this->redirect('auth', 'registrationForm', ['error' => 'Nepodarilo sa zaregistrovat, email sa už používa.']);
+                        return $this->html(['error' => 'Heslá sa nerovnajú.', "login" => $login], 'registrationForm');
                     }
                 } else {
-                    return $this->html( ['error' => 'Heslá sa nerovnajú.',"login"=>$login],'registrationForm');
+                    return $this->html(['error' => 'Heslo je príliš slabé.', "login" => $login], 'registrationForm');
                 }
             } else {
-                return $this->html( ['error' => 'Heslo je príliš slabé.',"login"=>$login],'registrationForm');
+                return $this->html(['error' => 'Email nie je správny.', "login" => $login], 'registrationForm');
             }
         } else {
-           return $this->html( ['error' => 'Email nie je správny.',"login"=>$login],'registrationForm');
-        }
-    } else {
             $this->redirect('auth', 'registrationForm', ['error' => 'Nespravny formát mena alebo priezviska.']);
         }
     }
@@ -112,12 +113,12 @@ class AuthController extends AControllerRedirect
                     $person[0]->setPassword($password);
                     //UPDATE
                     $person[0]->save();
-                    return $this->html(['error' => "","login"=>$login],'loginForm');
+                    return $this->html(['error' => "", "login" => $login], 'loginForm');
                 } else {
-                    return $this->html( ['error' => 'Heslá sa nerovnajú.',"login"=>$login],'changePasswordForm');
+                    return $this->html(['error' => 'Heslá sa nerovnajú.', "login" => $login], 'changePasswordForm');
                 }
             } else {
-                return $this->html( ['error' => 'Heslo je príliš slabé.',"login"=>$login],'changePasswordForm');
+                return $this->html(['error' => 'Heslo je príliš slabé.', "login" => $login], 'changePasswordForm');
             }
         } else {
             $this->redirect('auth', 'changePasswordForm', ['error' => 'Užívateľ s daným emailom neexistuje']);

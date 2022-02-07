@@ -9,10 +9,10 @@ class Trainer extends \App\Core\Model
 {
 
     public function __construct(
-        public int $id = 0,
+        public int     $id = 0,
         public ?string $name = null,
         public ?string $text = null,
-        public int $stars = 0,
+        public int     $stars = 0,
         public ?string $photoAddress = null,
     )
     {
@@ -20,7 +20,7 @@ class Trainer extends \App\Core\Model
 
     static public function setDbColumns()
     {
-        return ['id', 'name', 'text','stars','photoAddress'];
+        return ['id', 'name', 'text', 'stars', 'photoAddress'];
     }
 
     static public function setTableName()
