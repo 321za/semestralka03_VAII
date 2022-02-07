@@ -107,7 +107,6 @@ class CourseController extends AControllerRedirect
     {
         $idKurzu = $this->request()->getValue('id');
         $course = Course::getOne($idKurzu);
-        $user = $_SESSION['login'];
         if (Courses::delete($idKurzu)) {
             $course->capacity += 1;
             //UPDATE
