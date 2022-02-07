@@ -22,14 +22,23 @@ class UserController extends AControllerRedirect
     {
         $courses = ListOfUser::getAll('user = ?', [$_SESSION['login']]);
         $myclass = array();
-        foreach ($courses as $c)
-        {
-            array_push($myclass,Course::getOne($c->getIdKurzu()));
+        foreach ($courses as $c) {
+            array_push($myclass, Course::getOne($c->getIdKurzu()));
         }
 
         return $this->html(
-            [   'warning' => $this->request()->getValue('warning'),
+            ['warning' => $this->request()->getValue('warning'),
                 'courses' => $myclass]
+        );
+    }
+
+    public function calendarTrener()
+    {
+        $courses = Course::getAll('idTrener = ?', [$_SESSION['id']]);
+
+        return $this->html(
+            ['warning' => $this->request()->getValue('warning'),
+                'courses' => $courses]
         );
     }
 
@@ -42,7 +51,7 @@ class UserController extends AControllerRedirect
     public function deactivate()
     {
         User::deactivate();
-        $this->redirect('home','index',['warning' => 'Účet bol úspešne deaktivovaný']);
+        $this->redirect('home', 'index', ['warning' => 'Účet bol úspešne deaktivovaný']);
     }
 
 
@@ -62,7 +71,7 @@ class UserController extends AControllerRedirect
         $user = User::getOne($id);
         $user->setType(0);
         $user->save();
-        $this->redirect('user','admin');
+        $this->redirect('user', 'admin');
     }
 
     public function setTrener()
@@ -71,7 +80,7 @@ class UserController extends AControllerRedirect
         $user = User::getOne($id);
         $user->setType(1);
         $user->save();
-        $this->redirect('user','admin');
+        $this->redirect('user', 'admin');
     }
 
 }

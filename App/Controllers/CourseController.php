@@ -6,6 +6,7 @@ use App\Core\Responses\Response;
 use App\Courses;
 use App\Models\Course;
 use App\Models\ListOfUser;
+use App\Models\User;
 
 class CourseController extends AControllerRedirect
 {
@@ -17,15 +18,14 @@ class CourseController extends AControllerRedirect
 
     public function lekcieUprava()
     {
-        return $this->html(
-        );
+        return $this->html();
     }
 
     public function lekcie()
     {
         $courses = Course::getAll();
         return $this->html(
-            [   'warning' => $this->request()->getValue('warning'),
+            ['warning' => $this->request()->getValue('warning'),
                 'courses' => $courses]
         );
     }
@@ -35,7 +35,7 @@ class CourseController extends AControllerRedirect
         $courses = Course::getAll('typKurzu = ?', [1]);
 
         return $this->html(
-            [   'warning' => $this->request()->getValue('warning'),
+            ['warning' => $this->request()->getValue('warning'),
                 'courses' => $courses]
         );
     }
@@ -45,7 +45,7 @@ class CourseController extends AControllerRedirect
         $courses = Course::getAll('typKurzu = ?', [2]);
 
         return $this->html(
-            [   'warning' => $this->request()->getValue('warning'),
+            ['warning' => $this->request()->getValue('warning'),
                 'courses' => $courses]
         );
     }
@@ -55,7 +55,7 @@ class CourseController extends AControllerRedirect
         $courses = Course::getAll('typKurzu = ?', [3]);
 
         return $this->html(
-            [   'warning' => $this->request()->getValue('warning'),
+            ['warning' => $this->request()->getValue('warning'),
                 'courses' => $courses]
         );
     }
@@ -65,19 +65,21 @@ class CourseController extends AControllerRedirect
         $courses = Course::getAll('typKurzu = ?', [4]);
 
         return $this->html(
-            [   'warning' => $this->request()->getValue('warning'),
+            ['warning' => $this->request()->getValue('warning'),
                 'courses' => $courses]
         );
     }
 
 
-
     public function lekcieNova()
     {
+        $users = User::getAll();
+
         return $this->html(
+            [
+                'users' => $users]
         );
     }
-
 
 
     public function decreaseCapacity()
@@ -85,11 +87,9 @@ class CourseController extends AControllerRedirect
         $idKurzu = $this->request()->getValue('id');
         $course = Course::getOne($idKurzu);
         $capacity = $course->getCapacity();
-        if ($capacity > 0)
-        {
+        if ($capacity > 0) {
             $user = $_SESSION['login'];
-            if (Courses::accept($idKurzu,$user))
-            {
+            if (Courses::accept($idKurzu, $user)) {
                 $course->capacity -= 1;
                 //UPDATE
                 $course->save();
@@ -107,15 +107,13 @@ class CourseController extends AControllerRedirect
     {
         $idKurzu = $this->request()->getValue('id');
         $course = Course::getOne($idKurzu);
-        $capacity = $course->getCapacity();
         $user = $_SESSION['login'];
-            if (Courses::delete($idKurzu,$user))
-            {
-                $course->capacity += 1;
-                //UPDATE
-                $course->save();
-                $this->redirect('user', 'calendar', ['warning' => 'Úspešne odhlásenie.']);
-            }
+        if (Courses::delete($idKurzu)) {
+            $course->capacity += 1;
+            //UPDATE
+            $course->save();
+            $this->redirect('user', 'calendar', ['warning' => 'Úspešne odhlásenie.']);
+        }
     }
 
     public function delete()
@@ -124,7 +122,7 @@ class CourseController extends AControllerRedirect
         $course = Course::getOne($id);
         //DELETE
         $course->delete();
-        $this->redirect('course','lekcie');
+        $this->redirect('course', 'lekcie');
     }
 
     public function update()
@@ -136,13 +134,13 @@ class CourseController extends AControllerRedirect
         $time = $course->getTime();
         $info = $course->getInfo();
 
-        return $this->html( [
+        return $this->html([
             'id' => $id,
             'caption' => $caption,
             'info' => $info,
             'time' => $time,
             'capacity' => $capacity
-        ],'lekcieUprava');
+        ], 'lekcieUprava');
     }
 
     public function ulozitZmeny()
@@ -170,17 +168,18 @@ class CourseController extends AControllerRedirect
         $time = $this->request()->getValue('time');
         $info = $this->request()->getValue('info');
         $typKurzu = $this->request()->getValue('typKurzu');
+        $idTrenera = $this->request()->getValue('trener');
         $new = new Course();
         $new->setCapacity($capacity);
         $new->setCaption($caption);
         $new->setTime($time);
         $new->setInfo($info);
         $new->setTypKurzu($typKurzu);
+        $new->setIdTrener($idTrenera);
         //INSERT
         $new->save();
         $this->redirect('course', 'lekcie');
     }
-
 
 
 }

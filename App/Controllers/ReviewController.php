@@ -24,13 +24,11 @@ class ReviewController extends AControllerRedirect
             $new->save();
 
             $review = Review::getAll('email = ?', [$_SESSION['login']]);
-            foreach ($review as $r)
-            {
+            foreach ($review as $r) {
                 $rText = $r->getText();
-                if ($rText === $text)
-                {
+                if ($rText === $text) {
                     $id = $r->getId();
-                    return $this->json('{"name":"'.$_SESSION['name'].'", "id":"'.$id.'"}');
+                    return $this->json('{"name":"' . $_SESSION['name'] . '", "id":"' . $id . '"}');
                 }
             }
 
@@ -46,8 +44,7 @@ class ReviewController extends AControllerRedirect
     {
         $delItem = intval($this->request()->getValue('deleteItem'));
         $delReview = Review::getOne($delItem);
-        if ($delReview->getEmail() == $_SESSION['login'])
-        {
+        if (($delReview->getEmail() == $_SESSION['login']) || ($_SESSION['type']==2)) {
             //DELETE
             $delReview->delete();
             return $this->json('1');
@@ -61,11 +58,10 @@ class ReviewController extends AControllerRedirect
         $editItem = intval($this->request()->getValue('editItem'));
         $text = $this->request()->getValue('text');
         $editReview = Review::getOne($editItem);
-        if ($editReview->getEmail() == $_SESSION['login'])
-        {
+        if ($editReview->getEmail() == $_SESSION['login']) {
             $editReview->setText($text);
             $editReview->save();
-            return $this->json('{"text":"'.$text.'"}');
+            return $this->json('{"text":"' . $text . '"}');
         } else {
             return $this->json('');
         }

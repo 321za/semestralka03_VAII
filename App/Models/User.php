@@ -1,24 +1,25 @@
 <?php
 
-namespace  App\Models;
+namespace App\Models;
+
 use App\Core\Model;
 
 class User extends \App\Core\Model
 {
 
     public function __construct(
-        public int $id = 0,
+        public int     $id = 0,
         public ?string $email = null,
         public ?string $password = null,
         public ?string $name = null,
-        public int $type = 0,
+        public int     $type = 0,
     )
     {
     }
 
     static public function setDbColumns()
     {
-        return ['id', 'email', 'password','name','type'];
+        return ['id', 'email', 'password', 'name', 'type'];
     }
 
     static public function setTableName()
@@ -57,8 +58,7 @@ class User extends \App\Core\Model
 
     public static function isUser()
     {
-        if ($_SESSION['type'] == 0)
-        {
+        if ($_SESSION['type'] == 0) {
             return true;
         } else {
             return false;
@@ -67,8 +67,7 @@ class User extends \App\Core\Model
 
     public static function isTrainer()
     {
-        if ($_SESSION['type'] == 1)
-        {
+        if ($_SESSION['type'] == 1) {
             return true;
         } else {
             return false;
@@ -77,8 +76,7 @@ class User extends \App\Core\Model
 
     public static function isAdministrator()
     {
-        if ($_SESSION['type'] == 2)
-        {
+        if ($_SESSION['type'] == 2) {
             return true;
         } else {
             return false;

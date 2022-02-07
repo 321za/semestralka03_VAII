@@ -1,5 +1,5 @@
 <?php /** @var Array $data */ ?>
-<div class="medzera"> </div>
+<div class="medzera"></div>
 <div class="container">
     <div class="row">
         <div class="col-sm-5 offset-sm-4">
@@ -14,16 +14,19 @@
             <form name="form2" method="post" action="?c=auth&a=newPassword">
                 <div class="fcf-form-group">
                     <label for="exampleFormControlInput1" class="form-label">Email</label>
-                    <input type="email" value="<?= @$data['login']?>" class="fcf-form-control" name="login" id="exampleFormControlInput1" required>
+                    <input type="email" value="<?= @$data['login'] ?>" class="fcf-form-control" name="login"
+                           id="exampleFormControlInput1" required>
                 </div>
                 <div class="fcf-form-group">
                     <label for="exampleFormControlInput2" class="form-label">Heslo</label>
-                    <input type="password" class="fcf-form-control" name="password" id="exampleFormControlInput2" onkeyup="checkPassword(document.form2.password)" required>
+                    <input type="password" class="fcf-form-control" name="password" id="exampleFormControlInput2"
+                           onkeyup="checkPassword(document.form2.password)" required>
                     <p id="kontrolaHesla"></p>
                 </div>
                 <div class="fcf-form-group">
                     <label for="exampleFormControlInput3" class="form-label">Heslo znovu</label>
-                    <input type="password" class="fcf-form-control" name="passwordAgain" id="exampleFormControlInput3" onkeyup="equalPassword(document.form2.passwordAgain, document.form2.password)" required>
+                    <input type="password" class="fcf-form-control" name="passwordAgain" id="exampleFormControlInput3"
+                           onkeyup="equalPassword(document.form2.passwordAgain, document.form2.password)" required>
                     <p id="rovnostHesla"></p>
                 </div>
                 <div class="mb-3">

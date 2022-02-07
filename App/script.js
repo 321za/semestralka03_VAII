@@ -11,7 +11,7 @@ function setMode() {
     }
 }
 
-$(document).ready(function (){
+$(document).ready(function () {
     if (localStorage.getItem('pinkMode') == 'pink') {
         $('body').removeClass('pink');
         $('body').addClass("normal");
@@ -30,17 +30,16 @@ $(document).ready(function (){
             data: {
                 text: text,
             },
-            success: function (data){
+            success: function (data) {
                 let jsonData = JSON.parse(data);
-                if (jsonData.name != "")
-                {
+                if (jsonData.name != "") {
                     //alert(jsonData.name + " " + text + jsonData.id );
-                    $('#tableReview').append("<tr><td><h5>"+ jsonData.name +"<h5></td><td class='textR'><p id='tr'"+ jsonData.id+'">'+text +'</p></td><td><button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="'+ jsonData.id +'" ><i class="bi bi-trash-fill"></i></button></td></td><td> <button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block editBut" dataId="'+ jsonData.id +'"  text="'+ text +'"  data-bs-toggle="modal" data-bs-target="#myModalEdit" > <i class="bi bi-vector-pen"></i></button></td></tr>');
+                    $('#tableReview').append("<tr><td><h5>" + jsonData.name + "<h5></td><td class='textR'><p id='tr'" + jsonData.id + '">' + text + '</p></td><td><button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block delBut" dataId="' + jsonData.id + '" ><i class="bi bi-trash-fill"></i></button></td></td><td> <button class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block editBut" dataId="' + jsonData.id + '"  text="' + text + '"  data-bs-toggle="modal" data-bs-target="#myModalEdit" > <i class="bi bi-vector-pen"></i></button></td></tr>');
                 } else {
                     alert("Nepodarilo sa pridat recenziu!");
                 }
             },
-            error: function (){
+            error: function () {
                 alert("ERROR");
             }
         })
@@ -50,7 +49,7 @@ $(document).ready(function (){
 });
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     $(document).on('click', '.delBut', function () {
         let del_id = $(this).attr('dataId');
         let tr = $(this).closest('tr');
@@ -64,9 +63,8 @@ $(document).ready(function() {
             success: function (data) {
                 let jsonData = JSON.parse(data);
 
-                if (jsonData === 1)
-                {
-                    tr.fadeOut(1000, function(){
+                if (jsonData === 1) {
+                    tr.fadeOut(1000, function () {
                         $(this).remove();
                     });
                 } else {
@@ -78,8 +76,7 @@ $(document).ready(function() {
 })
 
 
-
-$(document).ready(function() {
+$(document).ready(function () {
     $(document).on('click', '.editBut', function () {
         let edit_id = $(this).attr('dataId');
         let text = $(this).attr('text');
@@ -91,89 +88,78 @@ $(document).ready(function() {
 })
 
 
-function uloz(){
-        let text = $('#textE').val();
-        let edit_id = $('#hiddenID').val();
+function uloz() {
+    let text = $('#textE').val();
+    let edit_id = $('#hiddenID').val();
 
-        $.ajax({
-            type: "POST",
-            url: 'http://localhost/semestralka03?c=review&a=editReview',
-            data: {
-                editItem: edit_id,
-                text: text,
-            },
-            success: function (data) {
-                let jsonData = JSON.parse(data);
-                if (jsonData.text != "")
-                {
-                    let edit_id = $('#hiddenID').val();
-                    $('.tableReview #tr'+edit_id).html(jsonData.text);
-                } else {
-                    alert("Nepodarilo sa upravit!");
-                }
-            },
-            error: function (){
-                alert("ERROR");
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost/semestralka03?c=review&a=editReview',
+        data: {
+            editItem: edit_id,
+            text: text,
+        },
+        success: function (data) {
+            let jsonData = JSON.parse(data);
+            if (jsonData.text != "") {
+                let edit_id = $('#hiddenID').val();
+                $('.tableReview #tr' + edit_id).html(jsonData.text);
+            } else {
+                alert("Nepodarilo sa upravit!");
             }
-        })
-        $('#myModalEdit').modal('hide');
+        },
+        error: function () {
+            alert("ERROR");
+        }
+    })
+    $('#myModalEdit').modal('hide');
 };
 
 
-
-
-function validateName()
-{
-    let name =  document.getElementById("nameValid");
+function validateName() {
+    let name = document.getElementById("nameValid");
     let nameValue = name.value;
     nameNumber = false;
     for (let i = 0; i < nameValue.length; i++) {
-        if (nameValue.charAt(i) >= '0' && nameValue.charAt(i) <= '9')
-        {
+        if (nameValue.charAt(i) >= '0' && nameValue.charAt(i) <= '9') {
             nameNumber = true;
         }
     }
     if (nameNumber) {
-        name.style.color="red";
+        name.style.color = "red";
     } else {
-        name.style.color="green";
+        name.style.color = "green";
     }
 }
 
-function validateSurname()
-{
-    let name =  document.getElementById("surnameValid");
+function validateSurname() {
+    let name = document.getElementById("surnameValid");
     let nameValue = name.value;
     nameNumber = false;
     for (let i = 0; i < nameValue.length; i++) {
-        if (nameValue.charAt(i) >= '0' && nameValue.charAt(i) <= '9')
-        {
+        if (nameValue.charAt(i) >= '0' && nameValue.charAt(i) <= '9') {
             nameNumber = true;
         }
     }
     if (nameNumber) {
-        name.style.color="red";
+        name.style.color = "red";
     } else {
-        name.style.color="green";
+        name.style.color = "green";
     }
 }
 
 
-
-function validateEmail()
-{
-     let inputEmail = document.getElementById("emailValid");
-     let format =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-     if (inputEmail.value.match(format))
-     {
-         inputEmail.style.color="rgb(0, 153, 0)";
-     } else {
-         inputEmail.style.color="red";
-     }
+function validateEmail() {
+    let inputEmail = document.getElementById("emailValid");
+    let format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (inputEmail.value.match(format)) {
+        inputEmail.style.color = "rgb(0, 153, 0)";
+    } else {
+        inputEmail.style.color = "red";
+    }
 }
 
-function checkPassword(password)
-{
+function checkPassword(password) {
     let heslo = password.value;
     let dlzka = heslo.length;
     let znaky = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -181,66 +167,58 @@ function checkPassword(password)
     let obsahujeCislo = false;
     let txt;
     for (let i = 0; i < dlzka; i++) {
-        if (heslo.charAt(i) >= '0' && heslo.charAt(i) <= '9')
-        {
+        if (heslo.charAt(i) >= '0' && heslo.charAt(i) <= '9') {
             obsahujeCislo = true;
         }
     }
     if (((dlzka > 9) && (pismena.test(heslo)))
-        || (( dlzka > 9) && obsahujeCislo)
+        || ((dlzka > 9) && obsahujeCislo)
         || ((dlzka > 9) && (pismena.test(heslo)) && obsahujeCislo)
-        || ((dlzka > 8) && (pismena.test(heslo)) && (obsahujeCislo && (znaky.test(heslo)))))
-    {
+        || ((dlzka > 8) && (pismena.test(heslo)) && (obsahujeCislo && (znaky.test(heslo))))) {
         txt = "silné heslo";
-        document.getElementById("kontrolaHesla").style.color="green";
+        document.getElementById("kontrolaHesla").style.color = "green";
     }
-    if (((7 < dlzka && dlzka <=9) && (pismena.test(heslo)))
-        || ((7< dlzka && dlzka <=9) && obsahujeCislo)
-        || ((6 < dlzka && dlzka <=9) && (pismena.test(heslo)) && obsahujeCislo)
-        || ((5 < dlzka && dlzka <= 8) && (pismena.test(heslo)) && obsahujeCislo&& (znaky.test(heslo))))
-    {
+    if (((7 < dlzka && dlzka <= 9) && (pismena.test(heslo)))
+        || ((7 < dlzka && dlzka <= 9) && obsahujeCislo)
+        || ((6 < dlzka && dlzka <= 9) && (pismena.test(heslo)) && obsahujeCislo)
+        || ((5 < dlzka && dlzka <= 8) && (pismena.test(heslo)) && obsahujeCislo && (znaky.test(heslo)))) {
         txt = "dobré heslo";
-        document.getElementById("kontrolaHesla").style.color="orange";
+        document.getElementById("kontrolaHesla").style.color = "orange";
     }
-    if (((dlzka <=7) && (pismena.test(heslo)))
-        || ((dlzka <=7) && obsahujeCislo)
-        || ((dlzka <=6) && (pismena.test(heslo)) && obsahujeCislo)
-        || ((dlzka <= 5) && (pismena.test(heslo)) && obsahujeCislo && (znaky.test(heslo))))
-    {
+    if (((dlzka <= 7) && (pismena.test(heslo)))
+        || ((dlzka <= 7) && obsahujeCislo)
+        || ((dlzka <= 6) && (pismena.test(heslo)) && obsahujeCislo)
+        || ((dlzka <= 5) && (pismena.test(heslo)) && obsahujeCislo && (znaky.test(heslo)))) {
         txt = "slabé heslo";
-        document.getElementById("kontrolaHesla").style.color="red";
+        document.getElementById("kontrolaHesla").style.color = "red";
     }
     document.getElementById("kontrolaHesla").innerHTML = txt;
 }
 
 
-function equalPassword(passwordAgain, password)
-{
+function equalPassword(passwordAgain, password) {
     let heslo = password.value;
     let hesloZnovu = passwordAgain.value;
     let txt;
-    if (heslo == hesloZnovu)
-    {
+    if (heslo == hesloZnovu) {
         txt = "heslá sa rovnajú";
-        document.getElementById("rovnostHesla").style.color="green";
+        document.getElementById("rovnostHesla").style.color = "green";
     } else {
         txt = "heslá sa nerovnajú";
-        document.getElementById("rovnostHesla").style.color="red";
+        document.getElementById("rovnostHesla").style.color = "red";
     }
     document.getElementById("rovnostHesla").innerHTML = txt;
 }
 
-function checkMessage()
-{
+function checkMessage() {
     let message = document.getElementById("mess");
     let popis;
-    if (message.value.length > 10)
-    {
+    if (message.value.length > 10) {
         popis = "✓";
-        document.getElementById("messageOk").style.color="green";
+        document.getElementById("messageOk").style.color = "green";
     } else {
         popis = "✗";
-        document.getElementById("messageOk").style.color="red";
+        document.getElementById("messageOk").style.color = "red";
     }
     document.getElementById("messageOk").innerHTML = popis;
 }

@@ -7,9 +7,9 @@
     </div>
 <?php } ?>
 <div class="container">
-    <h5>Tvoje naplánované lekcie:</h5>
+    <h5>Administrátor ti pridelil tieto lekcie:</h5>
     <?php if (\App\Models\User::isLogged()) { ?>
-        <?php if (\App\Models\User::isUser()) { ?>
+        <?php if (\App\Models\User::isTrainer()) { ?>
             <table id="tableCourses" class="tableCourses">
                 <tbody id="tableBody">
                 <?php foreach ($data['courses'] as $courses) { ?>
@@ -26,18 +26,11 @@
                         <td>
                             <p> <?= $courses->getTime() ?> </p>
                         </td>
-                        <td>
-                            <a href="?c=course&a=increaseCapacity&id=<?= $courses->id ?>">
-                                <button type="button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Odhlásiť sa
-                                </button>
-                            </a>
-                        </td>
                     </tr>
                 <?php } ?>
                 </tbody>
             </table>
         <?php } ?>
-
     <?php } ?>
 </div>
 

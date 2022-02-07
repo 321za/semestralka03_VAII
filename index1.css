@@ -2,19 +2,19 @@ body {
     margin: 2%;
     --main-bg-color: #00b3b3 ;
     --main-bg :#e600e6;
-    --number: 0 ;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .pink{
     --main-bg-color: #e600e6 ;
     --main-bg :#00b3b3;
-    --number: 26 ;
 }
 
 .normal{
     --main-bg-color: #00b3b3 ;
     --main-bg :#e600e6;
-    --number: 0 ;
 }
 
 .mode {
@@ -104,10 +104,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 
 .pata {
-     margin-top: 5vh;
      text-align: center;
      background-color: gray;
      padding: 1.5%;
+     margin-top: auto;
 }
 
 .icons {
@@ -118,11 +118,13 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 .page-container {
     min-height: 100%;
+    margin-bottom: 2%;
 }
 
 .container {
     margin-top: 5vh;
     max-width: 75vw;
+    min-height:100%;
 }
 
 

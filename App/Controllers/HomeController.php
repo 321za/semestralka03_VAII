@@ -72,7 +72,7 @@ class HomeController extends AControllerRedirect
             }
             $_SESSION['hodnotenie'] = 1;
         }
-        $this->redirect('home','trenerky');
+        $this->redirect('home', 'trenerky');
     }
 
 
@@ -80,10 +80,6 @@ class HomeController extends AControllerRedirect
     {
         return $this->html();
     }
-
-
-
-
 
 
 }

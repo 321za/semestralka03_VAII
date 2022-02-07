@@ -10,10 +10,15 @@ class Courses
 
     public static function accept($idKurzu, $user)
     {
-        $person = ListOfUser::getAll('user = ?', [$user]);
-        $class = ListOfUser::getAll('idKurzu = ?', [$idKurzu]);
-        if (!($person && $class))
-        {
+        $nasiel = false;
+        $class = ListOfUser::getAll();
+        foreach ($class as $c) {
+            if ($c->getIdKurzu()==$idKurzu && $c->getUser()==$user)
+            {
+                $nasiel = true;
+            }
+        }
+        if (!$nasiel) {
             $new = new ListOfUser();
             $new->setIdKurzu($idKurzu);
             $new->setUser($user);
@@ -25,14 +30,12 @@ class Courses
         }
     }
 
-    public static function delete($idKurzu, $user)
+    public static function delete($idKurzu)
     {
         $courses = ListOfUser::getAll('user = ?', [$_SESSION['login']]);
-        foreach ($courses as $c)
-        {
+        foreach ($courses as $c) {
             $cou = $c->getIdKurzu();
-            if ($cou == $idKurzu)
-            {
+            if ($cou == $idKurzu) {
                 $myclass = $c;
                 $id = $myclass->getId();
                 $user = ListOfUser::getOne($id);
